@@ -10,11 +10,12 @@
 </head>
 <body>
     <header>
-        <div class="container">
+        <div class="container" >
             <div class="logo">
                 <h1>ShopEase</h1>
             </div>
-            <nav>
+            <nav style="justify-content: space-between; display: flex;">
+                <ul></ul>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="inventory.html" class="active">Shop</a></li>
@@ -23,10 +24,7 @@
                     <button id="theme-toggle" aria-label="Toggle dark mode">
                         <i class="fas fa-moon"></i>
                     </button>
-                    <a href="/cart.html" class="cart-icon" aria-label="View cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
-                    </a>
+                    
                     <button class="mobile-menu-btn" aria-label="Toggle menu">
                         <i class="fas fa-bars"></i>
                     </button>
@@ -51,7 +49,12 @@
                     <aside class="filters">
                         <div class="filter-header">
                             <h3>Filters</h3>
-                            <button id="clear-filters" class="btn-text">Clear All</button>
+                            <div class="filter-actions">
+                                <button id="clear-filters" class="btn-text">Clear All</button>
+                                <button id="close-filters" class="btn-text close-filters-btn">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
                         </div>
                         
                         <div class="filter-group">
@@ -133,6 +136,9 @@
                     
                     <div class="products-area">
                         <div class="products-header">
+                            <button id="filter-toggle" class="btn btn-outlined filter-toggle-btn">
+                                <i class="fas fa-filter"></i> Filters
+                            </button>
                             <div class="sort-options">
                                 <label for="sort-by">Sort By:</label>
                                 <select id="sort-by">
@@ -231,7 +237,9 @@
     </div>
 
     <div id="footer-placeholder"></div>
-
+    
+    <!-- Overlay for mobile filters and modals -->
+    <div class="overlay"></div>
     
     <script>
         document.getElementById("footer-placeholder").innerHTML = fetch("/components/Footer.html")

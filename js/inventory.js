@@ -246,6 +246,7 @@ function renderProducts(products, page) {
                     </div>
                     ${!product.availability ? '<div class="sold-out-overlay"><span>Sold Out</span></div>' : ''}
                 </div>
+                
                 </a>
                 
                 <div class="product-details">
@@ -453,6 +454,45 @@ function setupEventListeners() {
     
     // Modal add to cart button
     modalAddToCartBtn.addEventListener('click', handleModalAddToCart);
+    
+    // Mobile filter toggle
+    const filterToggleBtn = document.getElementById('filter-toggle');
+    const closeFiltersBtn = document.getElementById('close-filters');
+    const filtersElement = document.querySelector('.filters');
+    
+    if (filterToggleBtn) {
+        filterToggleBtn.addEventListener('click', function() {
+            filtersElement.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    
+    if (closeFiltersBtn) {
+        closeFiltersBtn.addEventListener('click', function() {
+            filtersElement.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+    
+    // Close filters when clicking outside on mobile
+    overlay.addEventListener('click', function() {
+        if (filtersElement.classList.contains('active')) {
+            filtersElement.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 992 && filtersElement.classList.contains('active')) {
+            filtersElement.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
     
     // Cart
     closeCartBtn.addEventListener('click', closeCart);

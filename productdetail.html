@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShopEase - Product Detail</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/productdetail.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/productdetail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -16,17 +16,14 @@
             </div>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="../inventory.html" class="active">Shop</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="inventory.html" class="active">Shop</a></li>
                 </ul>
                 <div class="nav-icons">
                     <button id="theme-toggle" aria-label="Toggle dark mode">
                         <i class="fas fa-moon"></i>
                     </button>
-                    <a href="#" class="cart-icon" aria-label="View cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
-                    </a>
+                    
                     <button class="mobile-menu-btn" aria-label="Toggle menu">
                         <i class="fas fa-bars"></i>
                     </button>
@@ -40,8 +37,8 @@
             <div class="container">
                 <h1 id="product-title">Product Details</h1>
                 <div class="breadcrumb">
-                    <a href="../index.html">Home</a> / 
-                    <a href="../inventory.html">Shop</a> / 
+                    <a href="index.html">Home</a> / 
+                    <a href="inventory.html">Shop</a> / 
                     <span id="breadcrumb-product">Product</span>
                 </div>
             </div>
@@ -52,21 +49,20 @@
                 <div class="product-detail-container">
                     <div class="product-gallery">
                         <div class="main-image">
-                            <div class="image-placeholder" id="main-product-image"></div>
+                            <!-- <div class="image-placeholder" id="main-product-image"></div> -->
+                            <img class="image-placeholder" id="main-product-image" src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740" alt="">
                             <span class="product-badge" id="product-badge"></span>
                         </div>
                         <div class="thumbnail-gallery">
                             <div class="thumbnail active">
-                                <div class="image-placeholder"></div>
+                                <img class="image-placeholder" src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740" alt="">
                             </div>
                             <div class="thumbnail">
-                                <div class="image-placeholder"></div>
+                                <!-- <div ></div> -->
+                                <img class="image-placeholder" src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740" alt="">
                             </div>
                             <div class="thumbnail">
-                                <div class="image-placeholder"></div>
-                            </div>
-                            <div class="thumbnail">
-                                <div class="image-placeholder"></div>
+                                <img src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740" class="image-placeholder" alt="">
                             </div>
                         </div>
                     </div>
@@ -346,37 +342,12 @@
                 <section class="related-products">
                     <h2>Related Products</h2>
                     <div class="products-grid" id="related-products-container">
-                        <!-- Related products will be added dynamically via JavaScript -->
+                        
                     </div>
                 </section>
             </div>
         </section>
     </main>
-
-    <!-- Cart Sidebar -->
-    <div class="cart-sidebar">
-        <div class="cart-header">
-            <h3>Your Cart</h3>
-            <button class="close-cart" aria-label="Close cart">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="cart-items">
-            <div class="empty-cart-message">
-                <i class="fas fa-shopping-cart"></i>
-                <p>Your cart is empty</p>
-            </div>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span class="total-amount">$0.00</span>
-            </div>
-            <button class="btn btn-primary checkout-btn">Proceed to Checkout</button>
-        </div>
-    </div>
-    <div class="overlay"></div>
-
 
     <!-- Footer Section -->
     <div id="footer-placeholder"></div>
@@ -388,8 +359,9 @@
     </script>
 
     
-    <script src="../js/productdetail.js"></script>
-    <script src="../js/Navbar.js"></script>
+    <script src="js/productdetail.js"></script>
+    <script src="js/Navbar.js"></script>
     
 </body>
 </html>
+`

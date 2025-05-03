@@ -6,27 +6,43 @@
     <title>ShopEase - Your Shopping Destination</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/enhanced-animations.css">
+    <link rel="stylesheet" href="css/subtle-patterns.css">
+    <link rel="stylesheet" href="css/loading-animation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Enhanced styles for a more modern look */
+        
+    </style>
 </head>
 <body>
+    <!-- Page Loader -->
+    <div class="page-loader">
+        <div class="loader"></div>
+        <div class="loader-logo">ShopEase</div>
+    </div>
+    
+    <div class="content-container">
     <header>
         <div class="container">
-            <a href="/"><div class="logo" style="cursor: pointer;">
-                <h1>ShopEase</h1>
-            </div></a>
+            <a href="/">
+                <div class="logo" style="cursor: pointer;">
+                    <h1>ShopEase</h1>
+                </div>
+            </a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="../index.html" class="active">Home</a></li>
-                    <li><a href="../inventory.html">Shop</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="inventory.html">Shop</a></li>
                 </ul>
                 <div class="nav-icons">
                     <button id="theme-toggle" aria-label="Toggle dark mode">
                         <i class="fas fa-moon"></i>
                     </button>
-                    <a href="/cart.html" class="cart-icon active" aria-label="View cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
-                    </a>
+                    
                     <button class="mobile-menu-btn" aria-label="Toggle menu">
                         <i class="fas fa-bars"></i>
                     </button>
@@ -34,14 +50,18 @@
             </nav>
         </div>
     </header>
+    
     <main>
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
                     <h2>Discover Amazing Products</h2>
-                    <p>Shop our curated collection of high-quality items at unbeatable prices.</p>
-                    <a href="inventory.html" class="btn btn-primary">Shop Now</a>
+                    <p>Shop our curated collection of high-quality items at unbeatable prices. Experience the future of online shopping today.</p>
+                    <a href="inventory.html" class="btn btn-primary">
+                        <span>Shop Now</span>
+                        <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                    </a>
                 </div>
                 <div class="hero-image">
                     <div class="image-container">
@@ -56,35 +76,35 @@
         <!-- Features Section -->
         <section class="features">
             <div class="container">
-                <h2 class="section-title">Why Choose Us</h2>
+                <h2 class="section-title reveal">Why Choose Us</h2>
                 <div class="features-grid">
-                    <div class="feature-card">
+                    <div class="feature-card reveal">
                         <div class="feature-icon">
                             <i class="fas fa-truck"></i>
                         </div>
                         <h3>Fast Delivery</h3>
-                        <p>Get your products delivered within 24 hours.</p>
+                        <p>Get your products delivered within 24 hours with our premium shipping service.</p>
                     </div>
-                    <div class="feature-card">
+                    <div class="feature-card reveal">
                         <div class="feature-icon">
                             <i class="fas fa-medal"></i>
                         </div>
                         <h3>Quality Products</h3>
-                        <p>We ensure all products meet high-quality standards.</p>
+                        <p>We ensure all products meet high-quality standards with rigorous testing.</p>
                     </div>
-                    <div class="feature-card">
+                    <div class="feature-card reveal">
                         <div class="feature-icon">
                             <i class="fas fa-exchange-alt"></i>
                         </div>
                         <h3>Easy Returns</h3>
-                        <p>Not satisfied? Return within 30 days for a full refund.</p>
+                        <p>Not satisfied? Return within 30 days for a full refund, no questions asked.</p>
                     </div>
-                    <div class="feature-card">
+                    <div class="feature-card reveal">
                         <div class="feature-icon">
                             <i class="fas fa-headset"></i>
                         </div>
                         <h3>24/7 Support</h3>
-                        <p>Our customer support team is always available.</p>
+                        <p>Our customer support team is always available to assist you with any issues.</p>
                     </div>
                 </div>
             </div>
@@ -93,41 +113,50 @@
         <!-- Featured Products Section -->
         <section class="featured-products">
             <div class="container">
-                <h2 class="section-title">Featured Products</h2>
+                <h2 class="section-title reveal">Featured Products</h2>
                 <div class="products-preview" id="products-preview">
-                    <div class="product-card">
+                    <div class="product-card reveal">
                         <div class="product-image">
                             <div class="image-placeholder"></div>
                         </div>
                         <div class="product-details">
+                            <span style="display: inline-block; background: rgba(78, 107, 255, 0.1); color: var(--primary-color); padding: 4px 10px; border-radius: 20px; font-size: 12px; margin-bottom: 10px;">Best Seller</span>
                             <h3>Premium Headphones</h3>
+                            <p style="color: var(--text-secondary); margin-bottom: 15px;">Noise cancelling, wireless comfort</p>
                             <p class="product-price">$199.99</p>
                             <a href="inventory.html" class="btn btn-secondary">View Details</a>
                         </div>
                     </div>
-                    <div class="product-card">
+                    <div class="product-card reveal">
                         <div class="product-image">
                             <div class="image-placeholder"></div>
                         </div>
                         <div class="product-details">
+                            <span style="display: inline-block; background: rgba(52, 199, 89, 0.1); color: var(--secondary-color); padding: 4px 10px; border-radius: 20px; font-size: 12px; margin-bottom: 10px;">New Arrival</span>
                             <h3>Wireless Keyboard</h3>
+                            <p style="color: var(--text-secondary); margin-bottom: 15px;">Ergonomic design with RGB lighting</p>
                             <p class="product-price">$89.99</p>
                             <a href="inventory.html" class="btn btn-secondary">View Details</a>
                         </div>
                     </div>
-                    <div class="product-card">
+                    <div class="product-card reveal">
                         <div class="product-image">
                             <div class="image-placeholder"></div>
                         </div>
                         <div class="product-details">
+                            <span style="display: inline-block; background: rgba(255, 107, 78, 0.1); color: var(--accent-color); padding: 4px 10px; border-radius: 20px; font-size: 12px; margin-bottom: 10px;">Limited Edition</span>
                             <h3>Smart Watch</h3>
+                            <p style="color: var(--text-secondary); margin-bottom: 15px;">Health tracking with 7-day battery life</p>
                             <p class="product-price">$249.99</p>
                             <a href="inventory.html" class="btn btn-secondary">View Details</a>
                         </div>
                     </div>
                 </div>
                 <div class="view-all">
-                    <a href="inventory.html" class="btn btn-outlined">View All Products</a>
+                    <a href="inventory.html" class="btn btn-outlined">
+                        <span>View All Products</span>
+                        <i class="fas fa-chevron-right" style="margin-left: 8px; font-size: 0.8em;"></i>
+                    </a>
                 </div>
             </div>
         </section>
@@ -135,27 +164,42 @@
         <!-- Newsletter Section -->
         <section class="newsletter">
             <div class="container">
-                <div class="newsletter-content">
+                <div class="newsletter-content reveal">
                     <h2>Stay Updated</h2>
-                    <p>Subscribe to our newsletter for exclusive deals and updates.</p>
+                    <p>Subscribe to our newsletter for exclusive deals, new product announcements, and special offers.</p>
                     <form class="newsletter-form">
-                        <input type="email" placeholder="Enter your email" required>
-                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane" style="margin-right: 8px;"></i>
+                            Subscribe
+                        </button>
                     </form>
                 </div>
             </div>
         </section>
     </main>
 
-    
     <div id="footer-placeholder"></div>
+    </div><!-- End of content-container -->
 
     <script src="js/main.js"></script>
     <script src="/js/Navbar.js"></script>
+    <script src="/js/enhanced-interactions.js"></script>
+    <script src="/js/smooth-scroll.js"></script>
     <script>
-        document.getElementById("footer-placeholder").innerHTML = fetch("/components/Footer.html")
-      .then(res => res.text())
-      .then(html => document.getElementById("footer-placeholder").innerHTML = html)
+        // Page loading animation
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.page-loader').classList.add('loaded');
+                document.querySelector('.content-container').classList.add('loaded');
+            }, 800);
+        });
+        
+        // Load footer
+        fetch("/components/Footer.html")
+            .then(res => res.text())
+            .then(html => document.getElementById("footer-placeholder").innerHTML = html);
+    </script>
     </script>
 </body>
 </html>

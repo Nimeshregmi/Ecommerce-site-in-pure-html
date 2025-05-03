@@ -559,6 +559,11 @@ function loadRelatedProducts() {
     // Render related products
     relatedProductsContainer.innerHTML = '';
     
+    if (limitedRelated.length === 0) {
+        relatedProductsContainer.innerHTML = '<p class="no-products">No related products available.</p>';
+        return;
+    }
+    
     limitedRelated.forEach(product => {
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
@@ -571,24 +576,42 @@ function loadRelatedProducts() {
         const stars = generateStarRating(product.rating);
         
         productCard.innerHTML = `
-            <div class="product-image">
-                ${badgeHtml}
-                <div class="image-placeholder"></div>
-                <a href="productdetail.html?id=${product.id}" class="quick-view-btn">View Details</a>
-            </div>
-            <div class="product-details">
-                <h3>${product.name}</h3>
-                <div class="product-rating">
-                    <div class="stars">${stars}</div>
-                    <span>(${product.reviews} Reviews)</span>
+           <div class="product-card-inner">
+               <a href="productdetail.html?id=${product.id}" class="product-link" data-id="${product.id}">
+                <div class="product-image-container">
+                    ${badgeHtml}
+                    <img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="${product.name}" class="product-img">
+                    <div class="product-overlay">
+                        <button class="quick-view-btn" data-id="${product.id}">
+                            <i class="fas fa-eye"></i> Quick View
+                        </button>
+                    </div>
+                    ${!product.availability ? '<div class="sold-out-overlay"><span>Sold Out</span></div>' : ''}
                 </div>
-                <p class="product-price">$${product.price.toFixed(2)}</p>
-                <div class="product-actions">
-                    <button class="btn btn-primary add-to-cart-btn" data-id="${product.id}" ${!product.availability ? 'disabled' : ''}>
-                        <i class="fas fa-shopping-cart"></i> ${product.availability ? 'Add to Cart' : 'Out of Stock'}
-                    </button>
+                </a>
+                
+                <div class="product-details">
+                    <div class="product-category">${product.category}</div>
+                    <h3 class="product-title">${product.name}</h3>
+                    <div class="product-rating">
+                        <div class="stars">${stars}</div>
+                        <span>(${product.reviews})</span>
+                    </div>
+                    <div class="product-price-container">
+                        <p class="product-price">$${product.price.toFixed(2)}</p>
+                        ${product.badge === 'sale' ? `<p class="product-old-price">$${(product.price * 1.2).toFixed(2)}</p>` : ''}
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart-btn ${!product.availability ? 'disabled' : ''}" data-id="${product.id}" ${!product.availability ? 'disabled' : ''}>
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>${product.availability ? 'Add to Cart' : 'Out of Stock'}</span>
+                        </button>
+                        <button class="wishlist-btn" aria-label="Add to wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
+           </div>
         `;
         
         relatedProductsContainer.appendChild(productCard);
@@ -597,6 +620,15 @@ function loadRelatedProducts() {
     // Add event listeners to related products' "Add to Cart" buttons
     document.querySelectorAll('#related-products-container .add-to-cart-btn').forEach(btn => {
         btn.addEventListener('click', handleRelatedProductAddToCart);
+    });
+    
+    // Add event listeners to related products' "Quick View" buttons
+    document.querySelectorAll('#related-products-container .quick-view-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const productId = parseInt(e.currentTarget.dataset.id);
+            window.location.href = `productdetail.html?id=${productId}`;
+        });
     });
 }
 
@@ -798,23 +830,6 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// Theme toggle functionality
-// function toggleTheme() {
-//     const htmlElement = document.documentElement;
-//     const themeIcon = document.querySelector('#theme-toggle i');
-    
-//     if (htmlElement.getAttribute('data-theme') === 'dark') {
-//         htmlElement.removeAttribute('data-theme');
-//         themeIcon.classList.remove('fa-sun');
-//         themeIcon.classList.add('fa-moon');
-//         localStorage.setItem('theme', 'light');
-//     } else {
-//         htmlElement.setAttribute('data-theme', 'dark');
-//         themeIcon.classList.remove('fa-moon');
-//         themeIcon.classList.add('fa-sun');
-//         localStorage.setItem('theme', 'dark');
-//     }
-// }
 
 // Save state to localStorage
 function saveToLocalStorage() {
