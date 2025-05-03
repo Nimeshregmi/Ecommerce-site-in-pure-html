@@ -1,422 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ShopEase - Your Shopping Destination</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/landing.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/landing.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
     <header>
-        <div class="container">
-            <a href="/"><div class="logo" style="cursor: pointer;">
-                <h1>ShopEase</h1>
-            </div></a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="../index.html" class="active">Home</a></li>
-                    <li><a href="../inventory.html">Shop</a></li>
-                </ul>
-                <div class="nav-icons">
-                    <button id="theme-toggle" aria-label="Toggle dark mode">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    
-                    <button class="mobile-menu-btn" aria-label="Toggle menu">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </nav>
-        </div>
+      <div class="container">
+        <a href="/"
+          ><div class="logo" style="cursor: pointer; color: blue;">
+            <h1>ShopEase</h1>
+          </div></a
+        >
+        <nav>
+          <ul class="nav-links">
+            <li><a href="../index.html" class="active">Home</a></li>
+            <li><a href="../inventory.html">Shop</a></li>
+          </ul>
+          <div class="nav-icons">
+            <button id="theme-toggle" aria-label="Toggle dark mode">
+              <i class="fas fa-moon"></i>
+            </button>
+
+            <div class="mobile-menu-btn" aria-label="Toggle menu">
+              <i class="fas fa-bars"></i>
+            </div>
+          </div>
+        </nav>
+      </div>
     </header>
     <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <span class="hero-tag">Best Online Shopping Experience</span>
-                    <h1 class="hero-title">Discover Amazing Products For Your Lifestyle</h1>
-                    <p class="hero-description">Explore our curated collection of premium items at unbeatable prices. Shopping has never been easier or more enjoyable.</p>
-                    <div class="hero-buttons">
-                        <a href="inventory.html" class="btn btn-primary">Shop Collection <i class="fas fa-arrow-right"></i></a>
-                        <a href="#featured-products" class="btn btn-outlined">Explore Trending</a>
-                    </div>
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">15k+</span>
-                            <span class="stat-label">Happy Customers</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">25+</span>
-                            <span class="stat-label">Premium Brands</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">99%</span>
-                            <span class="stat-label">Customer Satisfaction</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Shopping Experience" class="main-hero-image">
-                    <div class="floating-product left">
-                        <div class="float-product-image">
-                            <img src="https://images.pexels.com/photos/577769/pexels-photo-577769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Headphones">
-                        </div>
-                        <div class="float-product-info">
-                            <div class="product-mini-title">Premium Headphones</div>
-                            <div class="product-mini-price">$199.99</div>
-                        </div>
-                    </div>
-                    <div class="floating-product right">
-                        <div class="float-product-image">
-                            <img src="https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Smart Watch">
-                        </div>
-                        <div class="float-product-info">
-                            <div class="product-mini-title">Smart Watch</div>
-                            <div class="product-mini-price">$249.99</div>
-                        </div>
-                    </div>
-                    <div class="hero-shape-1"></div>
-                    <div class="hero-shape-2"></div>
-                </div>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container">
+          <div class="hero-content">
+            <span class="hero-tag">Best Online Shopping Experience</span>
+            <h1 class="hero-title">
+              Discover Amazing Products For Your Lifestyle
+            </h1>
+            <p class="hero-description">
+              Explore our curated collection of premium items at unbeatable
+              prices. Shopping has never been easier or more enjoyable.
+            </p>
+            <div class="hero-buttons">
+              <a href="inventory.html" class="btn btn-primary"
+                >Shop Collection <i class="fas fa-arrow-right"></i
+              ></a>
+              <a href="#featured-products" class="btn btn-outlined"
+                >Explore Trending</a
+              >
             </div>
-            <div class="hero-brands">
-                <div class="container">
-                    <div class="brands-wrapper">
-                        <span class="trusted-by">Trusted by:</span>
-                        <div class="brand-logos">
-                            <div class="brand-logo">Technica</div>
-                            <div class="brand-logo">GlobalGear</div>
-                            <div class="brand-logo">EcoStyle</div>
-                            <div class="brand-logo">ProWare</div>
-                            <div class="brand-logo">SmartLiving</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="hero-stats">
+              <div class="stat-item">
+                <span class="stat-number">15k+</span>
+                <span class="stat-label">Happy Customers</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">25+</span>
+                <span class="stat-label">Premium Brands</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">99%</span>
+                <span class="stat-label">Customer Satisfaction</span>
+              </div>
             </div>
-        </section>
+          </div>
+          <div class="hero-image">
+            <img
+              src="https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              alt="Shopping Experience"
+              class="main-hero-image"
+            />
+            <div class="floating-product left">
+              <div class="float-product-image">
+                <img
+                  src="https://images.pexels.com/photos/577769/pexels-photo-577769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                  alt="Headphones"
+                />
+              </div>
+              <div class="float-product-info">
+                <div class="product-mini-title">Premium Headphones</div>
+                <div class="product-mini-price">$199.99</div>
+              </div>
+            </div>
+            <div class="floating-product right">
+              <div class="float-product-image">
+                <img
+                  src="https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                  alt="Smart Watch"
+                />
+              </div>
+              <div class="float-product-info">
+                <div class="product-mini-title">Smart Watch</div>
+                <div class="product-mini-price">$249.99</div>
+              </div>
+            </div>
+            <div class="hero-shape-1"></div>
+            <div class="hero-shape-2"></div>
+          </div>
+        </div>
+        <div class="hero-brands">
+          <div class="container">
+            <div class="brands-wrapper">
+              <span class="trusted-by">Trusted by:</span>
+              <div class="brand-logos">
+                <div class="brand-logo">Technica</div>
+                <div class="brand-logo">GlobalGear</div>
+                <div class="brand-logo">EcoStyle</div>
+                <div class="brand-logo">ProWare</div>
+                <div class="brand-logo">SmartLiving</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <!-- Features Section -->
-        <section class="features">
-            <div class="container">
-                <h2 class="section-title">Why Choose Us</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <h3>Fast Delivery</h3>
-                        <p>Get your products delivered within 24 hours.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-medal"></i>
-                        </div>
-                        <h3>Quality Products</h3>
-                        <p>We ensure all products meet high-quality standards.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-exchange-alt"></i>
-                        </div>
-                        <h3>Easy Returns</h3>
-                        <p>Not satisfied? Return within 30 days for a full refund.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <h3>24/7 Support</h3>
-                        <p>Our customer support team is always available.</p>
-                    </div>
-                </div>
+      <!-- Features Section -->
+      <section class="features">
+        <div class="container">
+          <h2 class="section-title">Why Choose Us</h2>
+          <p class="section-subtitle">
+            We provide exceptional service and value to make your shopping
+            experience outstanding
+          </p>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-truck"></i>
+              </div>
+              <h3>Fast Delivery</h3>
+              <p>Get your products delivered within 24 hours.</p>
             </div>
-        </section>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-medal"></i>
+              </div>
+              <h3>Quality Products</h3>
+              <p>We ensure all products meet high-quality standards.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-exchange-alt"></i>
+              </div>
+              <h3>Easy Returns</h3>
+              <p>Not satisfied? Return within 30 days for a full refund.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-headset"></i>
+              </div>
+              <h3>24/7 Support</h3>
+              <p>Our customer support team is always available.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <!-- Category Showcase Section -->
-        <section class="category-showcase">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Shop By Category</h2>
-                    <p class="section-subtitle">Explore our diverse collection of products</p>
-                </div>
-                <div class="categories-grid">
-                    <div class="category-card">
-                        <div class="category-img-container">
-                            <img src="https://images.pexels.com/photos/7974/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Electronics">
-                        </div>
-                        <div class="category-content">
-                            <h3>Electronics</h3>
-                            <p>Cutting-edge technology</p>
-                            <a href="inventory.html?category=electronics" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-img-container">
-                            <img src="https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Fashion">
-                        </div>
-                        <div class="category-content">
-                            <h3>Fashion</h3>
-                            <p>Trendy and timeless styles</p>
-                            <a href="inventory.html?category=fashion" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-img-container">
-                            <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Home & Living">
-                        </div>
-                        <div class="category-content">
-                            <h3>Home & Living</h3>
-                            <p>Enhance your living space</p>
-                            <a href="inventory.html?category=home" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-img-container">
-                            <img src="https://images.pexels.com/photos/5709656/pexels-photo-5709656.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sports & Outdoors">
-                        </div>
-                        <div class="category-content">
-                            <h3>Sports & Outdoors</h3>
-                            <p>Gear for active lifestyles</p>
-                            <a href="inventory.html?category=sports" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
+      <!-- Category Showcase Section -->
+      <section class="category-showcase">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Shop By Category</h2>
+            <p class="section-subtitle">
+              Explore our diverse collection of products
+            </p>
+          </div>
+          <div class="categories-grid">
+            <div class="category-card">
+              <div class="category-img-container">
+                <img
+                  src="https://images.pexels.com/photos/7974/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt="Electronics"
+                />
+              </div>
+              <div class="category-content">
+                <h3>Electronics</h3>
+                <p>Cutting-edge technology</p>
+                <a
+                  href="inventory.html?category=electronics"
+                  class="category-link"
+                  >Explore <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
             </div>
-        </section>
+            <div class="category-card">
+              <div class="category-img-container">
+                <img
+                  src="https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt="Fashion"
+                />
+              </div>
+              <div class="category-content">
+                <h3>Fashion</h3>
+                <p>Trendy and timeless styles</p>
+                <a href="inventory.html?category=fashion" class="category-link"
+                  >Explore <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+            <div class="category-card">
+              <div class="category-img-container">
+                <img
+                  src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt="Home & Living"
+                />
+              </div>
+              <div class="category-content">
+                <h3>Home & Living</h3>
+                <p>Enhance your living space</p>
+                <a href="inventory.html?category=home" class="category-link"
+                  >Explore <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+            <div class="category-card">
+              <div class="category-img-container">
+                <img
+                  src="https://images.pexels.com/photos/5709656/pexels-photo-5709656.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt="Sports & Outdoors"
+                />
+              </div>
+              <div class="category-content">
+                <h3>Sports & Outdoors</h3>
+                <p>Gear for active lifestyles</p>
+                <a href="inventory.html?category=sports" class="category-link"
+                  >Explore <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <!-- Testimonials Section -->
-        <section class="testimonials">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">What Our Customers Say</h2>
-                    <p class="section-subtitle">Real experiences from satisfied shoppers</p>
+      <!-- Testimonials Section -->
+      <section class="testimonials">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <p class="section-subtitle">
+              Real experiences from satisfied shoppers
+            </p>
+          </div>
+          <div class="testimonials-slider">
+            <div class="testimonial-card">
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "I absolutely love ShopEase! The product quality is outstanding
+                and the customer service team was incredibly helpful when I had
+                questions. Will definitely shop here again!"
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">
+                  <img
+                    src="https://randomuser.me/api/portraits/women/43.jpg"
+                    alt="Sarah Johnson"
+                  />
                 </div>
-                <div class="testimonials-slider">
-                    <div class="testimonial-card">
-                        <div class="testimonial-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial-text">"I absolutely love ShopEase! The product quality is outstanding and the customer service team was incredibly helpful when I had questions. Will definitely shop here again!"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah Johnson">
-                            </div>
-                            <div class="author-info">
-                                <h4>Sarah Johnson</h4>
-                                <p>Loyal Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <p class="testimonial-text">"The delivery was lightning fast, and the products exceeded my expectations. The website is also so intuitive and easy to navigate. Shopping made simple!"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Rivera">
-                            </div>
-                            <div class="author-info">
-                                <h4>Michael Rivera</h4>
-                                <p>Tech Enthusiast</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial-text">"As someone who shops online frequently, I can confidently say ShopEase offers some of the best prices and selection I've seen. The reward program is also fantastic!"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Emily Chen">
-                            </div>
-                            <div class="author-info">
-                                <h4>Emily Chen</h4>
-                                <p>Regular Shopper</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="author-info">
+                  <h4>Sarah Johnson</h4>
+                  <p>Loyal Customer</p>
                 </div>
+              </div>
             </div>
-        </section>
+            <div class="testimonial-card">
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <p class="testimonial-text">
+                "The delivery was lightning fast, and the products exceeded my
+                expectations. The website is also so intuitive and easy to
+                navigate. Shopping made simple!"
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">
+                  <img
+                    src="https://randomuser.me/api/portraits/men/32.jpg"
+                    alt="Michael Rivera"
+                  />
+                </div>
+                <div class="author-info">
+                  <h4>Michael Rivera</h4>
+                  <p>Tech Enthusiast</p>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                "As someone who shops online frequently, I can confidently say
+                ShopEase offers some of the best prices and selection I've seen.
+                The reward program is also fantastic!"
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">
+                  <img
+                    src="https://randomuser.me/api/portraits/women/65.jpg"
+                    alt="Emily Chen"
+                  />
+                </div>
+                <div class="author-info">
+                  <h4>Emily Chen</h4>
+                  <p>Regular Shopper</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <!-- Featured Products Section -->
-        <section class="featured-products">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Featured Products</h2>
-                    <p class="section-subtitle">Discover our most popular items</p>
+      <!-- Featured Products Section -->
+      <section class="featured-products">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Featured Products</h2>
+            <p class="section-subtitle">Discover our most popular items</p>
+          </div>
+          <div class="products-preview" id="products-preview">
+            <div class="product-card">
+              <div class="product-badge new">New</div>
+              <div class="product-image">
+                <img
+                  src="https://images.pexels.com/photos/577769/pexels-photo-577769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                  alt="Premium Headphones"
+                  class="product-img"
+                />
+                <div class="product-overlay">
+                  <div class="product-actions">
+                    <button class="action-btn">
+                      <i class="fas fa-heart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
                 </div>
-                <div class="products-preview" id="products-preview">
-                    <div class="product-card">
-                        <div class="product-badge new">New</div>
-                        <div class="product-image">
-                            <img src="https://images.pexels.com/photos/577769/pexels-photo-577769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Premium Headphones" class="product-img">
-                            <div class="product-overlay">
-                                <div class="product-actions">
-                                    <button class="action-btn"><i class="fas fa-heart"></i></button>
-                                    <button class="action-btn"><i class="fas fa-shopping-cart"></i></button>
-                                    <button class="action-btn"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-details">
-                            <div class="product-category">Audio</div>
-                            <h3 class="product-title">Premium Headphones</h3>
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(124)</span>
-                            </div>
-                            <p class="product-price">$199.99</p>
-                            <a href="productdetail.html?id=1" class="btn btn-primary product-btn">View Details</a>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-badge sale">Sale</div>
-                        <div class="product-image">
-                            <img src="https://images.pexels.com/photos/2115257/pexels-photo-2115257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Keyboard" class="product-img">
-                            <div class="product-overlay">
-                                <div class="product-actions">
-                                    <button class="action-btn"><i class="fas fa-heart"></i></button>
-                                    <button class="action-btn"><i class="fas fa-shopping-cart"></i></button>
-                                    <button class="action-btn"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-details">
-                            <div class="product-category">Electronics</div>
-                            <h3 class="product-title">Wireless Keyboard</h3>
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span>(89)</span>
-                            </div>
-                            <div class="product-price-wrapper">
-                                <p class="product-price">$89.99</p>
-                                <p class="product-old-price">$109.99</p>
-                            </div>
-                            <a href="productdetail.html?id=2" class="btn btn-primary product-btn">View Details</a>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-badge bestseller">Best Seller</div>
-                        <div class="product-image">
-                            <img src="https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Smart Watch" class="product-img">
-                            <div class="product-overlay">
-                                <div class="product-actions">
-                                    <button class="action-btn"><i class="fas fa-heart"></i></button>
-                                    <button class="action-btn"><i class="fas fa-shopping-cart"></i></button>
-                                    <button class="action-btn"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-details">
-                            <div class="product-category">Wearables</div>
-                            <h3 class="product-title">Smart Watch</h3>
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(156)</span>
-                            </div>
-                            <p class="product-price">$249.99</p>
-                            <a href="productdetail.html?id=3" class="btn btn-primary product-btn">View Details</a>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://images.pexels.com/photos/4065891/pexels-photo-4065891.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Smart Speaker" class="product-img">
-                            <div class="product-overlay">
-                                <div class="product-actions">
-                                    <button class="action-btn"><i class="fas fa-heart"></i></button>
-                                    <button class="action-btn"><i class="fas fa-shopping-cart"></i></button>
-                                    <button class="action-btn"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-details">
-                            <div class="product-category">Smart Home</div>
-                            <h3 class="product-title">Smart Speaker</h3>
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span>(78)</span>
-                            </div>
-                            <p class="product-price">$129.99</p>
-                            <a href="productdetail.html?id=4" class="btn btn-primary product-btn">View Details</a>
-                        </div>
-                    </div>
+              </div>
+              <div class="product-details">
+                <div class="product-category">Audio</div>
+                <h3 class="product-title">Premium Headphones</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>(124)</span>
                 </div>
-                <div class="view-all">
-                    <a href="inventory.html" class="btn btn-outlined">View All Products</a>
-                </div>
+                <p class="product-price">$199.99</p>
+                <a
+                  href="productdetail.html?id=1"
+                  class="btn btn-primary product-btn"
+                  >View Details</a
+                >
+              </div>
             </div>
-        </section>
+            <div class="product-card">
+              <div class="product-badge sale">Sale</div>
+              <div class="product-image">
+                <img
+                  src="https://images.pexels.com/photos/2115257/pexels-photo-2115257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                  alt="Wireless Keyboard"
+                  class="product-img"
+                />
+                <div class="product-overlay">
+                  <div class="product-actions">
+                    <button class="action-btn">
+                      <i class="fas fa-heart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="product-details">
+                <div class="product-category">Electronics</div>
+                <h3 class="product-title">Wireless Keyboard</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <span>(89)</span>
+                </div>
+                <div class="product-price-wrapper">
+                  <p class="product-price">$89.99</p>
+                  <p class="product-old-price">$109.99</p>
+                </div>
+                <a
+                  href="productdetail.html?id=2"
+                  class="btn btn-primary product-btn"
+                  >View Details</a
+                >
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-badge bestseller">Best Seller</div>
+              <div class="product-image">
+                <img
+                  src="https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                  alt="Smart Watch"
+                  class="product-img"
+                />
+                <div class="product-overlay">
+                  <div class="product-actions">
+                    <button class="action-btn">
+                      <i class="fas fa-heart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="product-details">
+                <div class="product-category">Wearables</div>
+                <h3 class="product-title">Smart Watch</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <span>(156)</span>
+                </div>
+                <p class="product-price">$249.99</p>
+                <a
+                  href="productdetail.html?id=3"
+                  class="btn btn-primary product-btn"
+                  >View Details</a
+                >
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-image">
+                <img
+                  src="https://images.pexels.com/photos/4065891/pexels-photo-4065891.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                  alt="Smart Speaker"
+                  class="product-img"
+                />
+                <div class="product-overlay">
+                  <div class="product-actions">
+                    <button class="action-btn">
+                      <i class="fas fa-heart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <button class="action-btn">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="product-details">
+                <div class="product-category">Smart Home</div>
+                <h3 class="product-title">Smart Speaker</h3>
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <span>(78)</span>
+                </div>
+                <p class="product-price">$129.99</p>
+                <a
+                  href="productdetail.html?id=4"
+                  class="btn btn-primary product-btn"
+                  >View Details</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="view-all">
+            <a href="inventory.html" class="btn btn-outlined"
+              >View All Products</a
+            >
+          </div>
+        </div>
+      </section>
 
-        <!-- Promo Banner -->
-        <section class="promo-banner">
-            <div class="container">
-                <div class="promo-content">
-                    <h2 class="promo-title">Special Offer</h2>
-                    <h3 class="promo-subtitle">Get 20% Off Your First Purchase</h3>
-                    <p class="promo-description">Use code <strong>WELCOME20</strong> at checkout</p>
-                    <a href="inventory.html" class="btn btn-accent">Shop Now</a>
-                </div>
-            </div>
-        </section>
+      <!-- Promo Banner -->
+      <section class="promo-banner">
+        <div class="container">
+          <div class="promo-content">
+            <h2 class="promo-title">Special Offer</h2>
+            <h3 class="promo-subtitle">Get 20% Off Your First Purchase</h3>
+            <p class="promo-description">
+              Use code <strong>WELCOME20</strong> at checkout
+            </p>
+            <a href="inventory.html" class="btn btn-accent">Shop Now</a>
+          </div>
+        </div>
+      </section>
 
-        <!-- Newsletter Section -->
-        <section class="newsletter">
-            <div class="container">
-                <div class="newsletter-content">
-                    <h2>Stay Updated</h2>
-                    <p>Subscribe to our newsletter for exclusive deals and updates.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Enter your email" required>
-                        <button type="submit" class="btn btn-primary">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-        </section>
+      <!-- Newsletter Section -->
+      <section class="newsletter">
+        <div class="container">
+          <div class="newsletter-content">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for exclusive deals and updates.</p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Enter your email" required />
+              <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </section>
     </main>
 
-    
     <div id="footer-placeholder"></div>
 
     <script src="js/main.js"></script>
     <script src="/js/Navbar.js"></script>
     <script>
-        document.getElementById("footer-placeholder").innerHTML = fetch("/components/Footer.html")
-      .then(res => res.text())
-      .then(html => document.getElementById("footer-placeholder").innerHTML = html)
+      document.getElementById("footer-placeholder").innerHTML = fetch(
+        "/components/Footer.html"
+      )
+        .then((res) => res.text())
+        .then(
+          (html) =>
+            (document.getElementById("footer-placeholder").innerHTML = html)
+        );
     </script>
-</body>
+  </body>
 </html>

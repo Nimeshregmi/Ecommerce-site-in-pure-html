@@ -10,6 +10,7 @@
     --accent-color: #ff6b4e;
     --accent-color-rgb: 255, 107, 78;
     --background-color: #f8f9fa;
+    --background-alt: #f0f2f5;
     --bg-secondary: #f0f0f0;
     --bg-secondary-rgb: 240, 240, 240;
     --bg-hover: #e9ecef;
@@ -19,8 +20,12 @@
     --text-light: #999999;
     --border-color: #e1e4e8;
     --border-color-rgb: 225, 228, 232;
-    --shadow-color: rgba(0, 0, 0, 0.2);
-    --box-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --box-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --box-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --box-shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.15);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --card-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.12);
     --font-weight-medium: 500;
     --font-weight-bold: 700;
     
@@ -65,6 +70,7 @@
     --primary-dark: #5a6fe0;
     --primary-dark-rgb: 90, 111, 224;
     --background-color: #121212;
+    --background-alt: #1a1a1a;
     --bg-secondary: #2a2a2a;
     --bg-secondary-rgb: 42, 42, 42;
     --bg-hover: #333333;
@@ -74,8 +80,12 @@
     --text-light: #808080;
     --border-color: #2d2d2d;
     --border-color-rgb: 45, 45, 45;
-    --shadow-color: rgba(0, 0, 0, 0.4);
-    --box-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --box-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --box-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+    --box-shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.4);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --card-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
 /* Reset and Base Styles */
@@ -99,6 +109,11 @@ body {
     display: flex;
     flex-direction: column;
     transition: background-color var(--transition-normal), color var(--transition-normal);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(var(--primary-color-rgb), 0.03) 0%, transparent 200px),
+        radial-gradient(circle at 80% 70%, rgba(var(--accent-color-rgb), 0.03) 0%, transparent 200px);
 }
 
 main {
@@ -165,45 +180,90 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.75rem 1.5rem;
+    padding: 0.85rem 1.8rem;
     font-size: var(--font-size-md);
     font-weight: 600;
-    border-radius: var(--border-radius-md);
+    border-radius: var(--border-radius-lg);
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     border: none;
     text-align: center;
+    letter-spacing: 0.02em;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--box-shadow-sm);
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.btn:hover::after {
+    transform: translateX(0);
 }
 
 .btn-primary {
-    background-color: var(--primary-color);
+    background: var(--primary-gradient);
     color: white;
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-dark);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #5a4fd6 100%);
     color: white;
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow-md);
 }
 
 .btn-secondary {
-    background-color: var(--secondary-color);
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #28a745 100%);
     color: white;
 }
 
 .btn-secondary:hover {
-    background-color: #2bb04e;
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
     color: white;
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow-md);
 }
 
 .btn-outlined {
     background-color: transparent;
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
+    position: relative;
+    z-index: 1;
+}
+
+.btn-outlined::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-gradient);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .btn-outlined:hover {
-    background-color: var(--primary-color);
     color: white;
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow-md);
+}
+
+.btn-outlined:hover::before {
+    opacity: 1;
 }
 
 .btn-text {
@@ -224,11 +284,13 @@ h1, h2, h3, h4, h5, h6 {
 /* Header */
 header {
     background-color: var(--card-bg-color);
-    box-shadow: 0 2px 8px var(--shadow-color);
+    box-shadow: 0 4px 20px var(--shadow-color);
     position: sticky;
     top: 0;
     z-index: 100;
-    transition: background-color var(--transition-normal);
+    transition: all var(--transition-normal);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
 }
 
 header .container {
@@ -242,6 +304,11 @@ header .container {
 .logo h1 {
     font-size: var(--font-size-xl);
     margin-bottom: 0;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-weight: 800;
+    letter-spacing: -0.5px;
 }
 
 nav {
@@ -259,25 +326,38 @@ nav {
 
 .nav-links a {
     color: var(--text-primary);
-    font-weight: 500;
-    padding: 0.5rem;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
     position: relative;
+    border-radius: var(--border-radius-md);
+    transition: all var(--transition-normal);
+}
+
+.nav-links a:hover {
+    background-color: var(--bg-hover);
+    color: var(--primary-color);
 }
 
 .nav-links a::after {
     content: '';
     position: absolute;
     width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: var(--primary-color);
+    height: 3px;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-gradient);
     transition: width var(--transition-normal);
+    border-radius: 3px;
 }
 
 .nav-links a:hover::after,
 .nav-links a.active::after {
-    width: 100%;
+    width: 70%;
+}
+
+.nav-links a.active {
+    color: var(--primary-color);
 }
 
 .nav-icons {
@@ -293,14 +373,22 @@ nav {
     color: var(--text-primary);
     font-size: var(--font-size-lg);
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0.6rem;
     position: relative;
-    transition: color var(--transition-fast);
+    transition: all var(--transition-fast);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-icons button:hover,
 .nav-icons a:hover {
     color: var(--primary-color);
+    background-color: var(--bg-hover);
+    transform: translateY(-2px);
 }
 
 .cart-count {
