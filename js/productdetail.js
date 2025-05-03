@@ -821,23 +821,7 @@ function saveToLocalStorage() {
     localStorage.setItem('shopEaseCart', JSON.stringify(cart));
 }
 
-// Load state from localStorage
-// function loadFromLocalStorage() {
-//     const savedTheme = localStorage.getItem('theme');
-//     const themeIcon = document.querySelector('#theme-toggle i');
-    
-//     if (savedTheme === 'dark') {
-//         document.documentElement.setAttribute('data-theme', 'dark');
-//         themeIcon.classList.remove('fa-moon');
-//         themeIcon.classList.add('fa-sun');
-//     }
-    
-//     // Load cart
-//     const savedCart = localStorage.getItem('shopEaseCart');
-//     if (savedCart) {
-//         cart = JSON.parse(savedCart);
-//     }
-// }
+
 
 // Add CSS for notifications and other dynamic elements
 function addDynamicStyles() {

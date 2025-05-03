@@ -11,7 +11,7 @@
     --text-secondary: #666666;
     --text-light: #999999;
     --border-color: #e1e4e8;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --shadow-color: rgba(0, 0, 0,0.1);
     
     /* Spacing */
     --spacing-xs: 0.25rem;
@@ -57,7 +57,7 @@
     --text-secondary: #b0b0b0;
     --text-light: #808080;
     --border-color: #2d2d2d;
-    --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-color: rgba(255, 255, 255,0.1);
 }
 
 /* Reset and Base Styles */

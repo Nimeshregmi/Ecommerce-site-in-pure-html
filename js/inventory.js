@@ -234,27 +234,42 @@ function renderProducts(products, page) {
         const stars = generateStarRating(product.rating);
         
         productCard.innerHTML = `
-           <a href="html/productdetail.html" class="product-link" data-id="${product.id}">
-            <div class="product-image">
-                ${badgeHtml}
-                <img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="${product.name}" class="product-img">
-                <div class="image-placeholder"></div>
-                <button class="quick-view-btn" data-id="${product.id}">Quick View</button>
-            </div>
-            </a>
-            <div class="product-details" style="margin :10px 10px 10px 10px;">
-                <h3>${product.name}</h3>
-                <div class="product-rating">
-                    <div class="stars">${stars}</div>
-                    <span>(${product.reviews} Reviews)</span>
+           <div class="product-card-inner">
+               <a href="productdetail.html" class="product-link" data-id="${product.id}">
+                <div class="product-image-container">
+                    ${badgeHtml}
+                    <img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="${product.name}" class="product-img">
+                    <div class="product-overlay">
+                        <button class="quick-view-btn" data-id="${product.id}">
+                            <i class="fas fa-eye"></i> Quick View
+                        </button>
+                    </div>
+                    ${!product.availability ? '<div class="sold-out-overlay"><span>Sold Out</span></div>' : ''}
                 </div>
-                <p class="product-price">$${product.price.toFixed(2)}</p>
-                <div class="product-actions">
-                    <button class="btn btn-primary add-to-cart-btn" data-id="${product.id}" ${!product.availability ? 'disabled' : ''}>
-                        <i class="fas fa-shopping-cart"></i> ${product.availability ? 'Add to Cart' : 'Out of Stock'}
-                    </button>
+                </a>
+                
+                <div class="product-details">
+                    <div class="product-category">${product.category}</div>
+                    <h3 class="product-title">${product.name}</h3>
+                    <div class="product-rating">
+                        <div class="stars">${stars}</div>
+                        <span>(${product.reviews})</span>
+                    </div>
+                    <div class="product-price-container">
+                        <p class="product-price">$${product.price.toFixed(2)}</p>
+                        ${product.badge === 'sale' ? `<p class="product-old-price">$${(product.price * 1.2).toFixed(2)}</p>` : ''}
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart-btn ${!product.availability ? 'disabled' : ''}" data-id="${product.id}" ${!product.availability ? 'disabled' : ''}>
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>${product.availability ? 'Add to Cart' : 'Out of Stock'}</span>
+                        </button>
+                        <button class="wishlist-btn" aria-label="Add to wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
+           </div>
         `;
         
         productsContainer.appendChild(productCard);
