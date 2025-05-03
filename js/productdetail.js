@@ -799,22 +799,22 @@ function showNotification(message, type = 'info') {
 }
 
 // Theme toggle functionality
-function toggleTheme() {
-    const htmlElement = document.documentElement;
-    const themeIcon = document.querySelector('#theme-toggle i');
+// function toggleTheme() {
+//     const htmlElement = document.documentElement;
+//     const themeIcon = document.querySelector('#theme-toggle i');
     
-    if (htmlElement.getAttribute('data-theme') === 'dark') {
-        htmlElement.removeAttribute('data-theme');
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-        localStorage.setItem('theme', 'light');
-    } else {
-        htmlElement.setAttribute('data-theme', 'dark');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-        localStorage.setItem('theme', 'dark');
-    }
-}
+//     if (htmlElement.getAttribute('data-theme') === 'dark') {
+//         htmlElement.removeAttribute('data-theme');
+//         themeIcon.classList.remove('fa-sun');
+//         themeIcon.classList.add('fa-moon');
+//         localStorage.setItem('theme', 'light');
+//     } else {
+//         htmlElement.setAttribute('data-theme', 'dark');
+//         themeIcon.classList.remove('fa-moon');
+//         themeIcon.classList.add('fa-sun');
+//         localStorage.setItem('theme', 'dark');
+//     }
+// }
 
 // Save state to localStorage
 function saveToLocalStorage() {
@@ -822,23 +822,22 @@ function saveToLocalStorage() {
 }
 
 // Load state from localStorage
-function loadFromLocalStorage() {
-    // Load theme
-    const savedTheme = localStorage.getItem('theme');
-    const themeIcon = document.querySelector('#theme-toggle i');
+// function loadFromLocalStorage() {
+//     const savedTheme = localStorage.getItem('theme');
+//     const themeIcon = document.querySelector('#theme-toggle i');
     
-    if (savedTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-    }
+//     if (savedTheme === 'dark') {
+//         document.documentElement.setAttribute('data-theme', 'dark');
+//         themeIcon.classList.remove('fa-moon');
+//         themeIcon.classList.add('fa-sun');
+//     }
     
-    // Load cart
-    const savedCart = localStorage.getItem('shopEaseCart');
-    if (savedCart) {
-        cart = JSON.parse(savedCart);
-    }
-}
+//     // Load cart
+//     const savedCart = localStorage.getItem('shopEaseCart');
+//     if (savedCart) {
+//         cart = JSON.parse(savedCart);
+//     }
+// }
 
 // Add CSS for notifications and other dynamic elements
 function addDynamicStyles() {

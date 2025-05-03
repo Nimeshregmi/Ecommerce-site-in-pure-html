@@ -242,7 +242,7 @@ function renderProducts(products, page) {
                 <button class="quick-view-btn" data-id="${product.id}">Quick View</button>
             </div>
             </a>
-            <div class="product-details">
+            <div class="product-details" style="margin :10px 10px 10px 10px;">
                 <h3>${product.name}</h3>
                 <div class="product-rating">
                     <div class="stars">${stars}</div>
@@ -449,17 +449,7 @@ function setupEventListeners() {
     // Checkout button
     checkoutBtn.addEventListener('click', handleCheckout);
     
-    // Theme toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    themeToggle.addEventListener('click', toggleTheme);
-    
-    // Mobile menu
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
-    mobileMenuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        overlay.classList.toggle('active');
-    });
+    // Checkout button event listener already set above
 }
 
 // Sort products
@@ -937,23 +927,7 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// Theme toggle functionality
-function toggleTheme() {
-    const htmlElement = document.documentElement;
-    const themeIcon = document.querySelector('#theme-toggle i');
-    
-    if (htmlElement.getAttribute('data-theme') === 'dark') {
-        htmlElement.removeAttribute('data-theme');
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-        localStorage.setItem('theme', 'light');
-    } else {
-        htmlElement.setAttribute('data-theme', 'dark');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-        localStorage.setItem('theme', 'dark');
-    }
-}
+// Theme toggle functionality has been removed
 
 // Save state to localStorage
 function saveToLocalStorage() {
@@ -969,15 +943,7 @@ function saveToLocalStorage() {
 
 // Load state from localStorage
 function loadFromLocalStorage() {
-    // Load theme
-    const savedTheme = localStorage.getItem('theme');
-    const themeIcon = document.querySelector('#theme-toggle i');
-    
-    if (savedTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-    }
+    // Theme-related code has been removed
     
     // Load app state
     const savedState = localStorage.getItem('shopEaseState');

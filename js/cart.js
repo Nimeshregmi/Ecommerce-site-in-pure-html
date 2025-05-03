@@ -708,23 +708,7 @@ function completeOrder() {
     saveToLocalStorage();
 }
 
-// Theme toggle functionality
-function toggleTheme() {
-    const htmlElement = document.documentElement;
-    const themeIcon = document.querySelector('#theme-toggle i');
-    
-    if (htmlElement.getAttribute('data-theme') === 'dark') {
-        htmlElement.removeAttribute('data-theme');
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-        localStorage.setItem('theme', 'light');
-    } else {
-        htmlElement.setAttribute('data-theme', 'dark');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-        localStorage.setItem('theme', 'dark');
-    }
-}
+
 
 // Show notification
 function showNotification(message, type = 'info') {
@@ -756,32 +740,6 @@ function saveToLocalStorage() {
     localStorage.setItem('shopEaseRecentlyViewed', JSON.stringify(recentlyViewed));
 }
 
-// Load state from localStorage
-function loadFromLocalStorage() {
-    // Load theme
-    const savedTheme = localStorage.getItem('theme');
-    const themeIcon = document.querySelector('#theme-toggle i');
-    
-    if (savedTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        if (themeIcon) {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        }
-    }
-    
-    // Load cart
-    const savedCart = localStorage.getItem('shopEaseCart');
-    if (savedCart) {
-        cart = JSON.parse(savedCart);
-    }
-    
-    // Load recently viewed
-    const savedRecentlyViewed = localStorage.getItem('shopEaseRecentlyViewed');
-    if (savedRecentlyViewed) {
-        recentlyViewed = JSON.parse(savedRecentlyViewed);
-    }
-}
 
 // Add CSS for notifications
 function addDynamicStyles() {
