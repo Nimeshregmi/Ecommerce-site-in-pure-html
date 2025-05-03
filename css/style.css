@@ -2,16 +2,27 @@
 :root {
     /* Colors */
     --primary-color: #4e6bff;
+    --primary-color-rgb: 78, 107, 255;
     --primary-dark: #3a51d6;
+    --primary-dark-rgb: 58, 81, 214;
     --secondary-color: #34c759;
+    --secondary-color-rgb: 52, 199, 89;
     --accent-color: #ff6b4e;
+    --accent-color-rgb: 255, 107, 78;
     --background-color: #f8f9fa;
+    --bg-secondary: #f0f0f0;
+    --bg-secondary-rgb: 240, 240, 240;
+    --bg-hover: #e9ecef;
     --card-bg-color: #ffffff;
     --text-primary: #333333;
     --text-secondary: #666666;
     --text-light: #999999;
     --border-color: #e1e4e8;
-    --shadow-color: rgba(0, 0, 0,0.2);
+    --border-color-rgb: 225, 228, 232;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --box-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
     
     /* Spacing */
     --spacing-xs: 0.25rem;
@@ -50,14 +61,21 @@
 /* Dark Theme Variables */
 [data-theme="dark"] {
     --primary-color: #6e85ff;
+    --primary-color-rgb: 110, 133, 255;
     --primary-dark: #5a6fe0;
+    --primary-dark-rgb: 90, 111, 224;
     --background-color: #121212;
+    --bg-secondary: #2a2a2a;
+    --bg-secondary-rgb: 42, 42, 42;
+    --bg-hover: #333333;
     --card-bg-color: #1e1e1e;
     --text-primary: #f0f0f0;
     --text-secondary: #b0b0b0;
     --text-light: #808080;
     --border-color: #2d2d2d;
-    --shadow-color: rgba(255, 255, 255,0.2);
+    --border-color-rgb: 45, 45, 45;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --box-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Reset and Base Styles */

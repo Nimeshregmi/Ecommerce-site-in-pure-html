@@ -37,9 +37,9 @@
             <div class="container">
                 <h1 id="product-title">Product Details</h1>
                 <div class="breadcrumb">
-                    <a href="index.html">Home</a> / 
-                    <a href="inventory.html">Shop</a> / 
-                    <span id="breadcrumb-product">Product</span>
+                    <a href="index.html"><i class="fas fa-home"></i> Home</a> / 
+                    <a href="inventory.html"><i class="fas fa-store"></i> Shop</a> / 
+                    <span id="breadcrumb-product"><i class="fas fa-tag"></i> Product</span>
                 </div>
             </div>
         </section>
@@ -51,7 +51,7 @@
                         <div class="main-image">
                             <!-- <div class="image-placeholder" id="main-product-image"></div> -->
                             <img class="image-placeholder" id="main-product-image" src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740" alt="">
-                            <span class="product-badge" id="product-badge"></span>
+                            <span class="product-badge" id="product-badge"><i class="fas fa-fire"></i> New Arrival</span>
                         </div>
                         <div class="thumbnail-gallery">
                             <div class="thumbnail active">
@@ -124,12 +124,49 @@
                             <button class="btn btn-outlined wishlist-btn">
                                 <i class="far fa-heart"></i> Add to Wishlist
                             </button>
+                            <button class="btn btn-text" title="Compare">
+                                <i class="fas fa-exchange-alt"></i> Compare
+                            </button>
                         </div>
                         
                         <div class="product-meta">
-                            <p><strong>SKU:</strong> <span id="product-sku">PR12345</span></p>
-                            <p><strong>Category:</strong> <span id="product-category">Electronics</span></p>
-                            <p><strong>Availability:</strong> <span id="product-availability" class="in-stock">In Stock</span></p>
+                            <p><strong><i class="fas fa-barcode"></i> SKU:</strong> <span id="product-sku">PR12345</span></p>
+                            <p><strong><i class="fas fa-tags"></i> Category:</strong> <span id="product-category">Electronics</span></p>
+                            <p><strong><i class="fas fa-box-open"></i> Availability:</strong> <span id="product-availability" class="in-stock">In Stock</span></p>
+                            <p><strong><i class="fas fa-truck"></i> Shipping:</strong> <span>Free shipping</span></p>
+                        </div>
+                        
+                        <div class="quick-buy-options">
+                            <h3><i class="fas fa-bolt"></i> Quick Buy Options</h3>
+                            <div class="payment-options">
+                                <button class="payment-option"><i class="fab fa-paypal"></i> PayPal</button>
+                                <button class="payment-option"><i class="fab fa-apple-pay"></i> Apple Pay</button>
+                                <button class="payment-option"><i class="fab fa-google-pay"></i> Google Pay</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-guarantees">
+                            <div class="guarantee-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <div>
+                                    <h4>100% Secure Payment</h4>
+                                    <p>All major credit cards accepted</p>
+                                </div>
+                            </div>
+                            <div class="guarantee-item">
+                                <i class="fas fa-exchange-alt"></i>
+                                <div>
+                                    <h4>30-Day Returns</h4>
+                                    <p>Easy return policy</p>
+                                </div>
+                            </div>
+                            <div class="guarantee-item">
+                                <i class="fas fa-truck"></i>
+                                <div>
+                                    <h4>Free Shipping</h4>
+                                    <p>On orders over $50</p>
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="social-sharing">
@@ -349,6 +386,20 @@
         </section>
     </main>
 
+    <!-- Mobile Sticky Add to Cart -->
+    <div class="mobile-sticky-cart">
+        <div class="sticky-product-info">
+            <img id="sticky-product-image" src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740" alt="">
+            <div>
+                <h4 id="sticky-product-name">Product Name</h4>
+                <p id="sticky-product-price">$299.99</p>
+            </div>
+        </div>
+        <button class="btn btn-primary sticky-add-to-cart">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+        </button>
+    </div>
+
     <!-- Footer Section -->
     <div id="footer-placeholder"></div>
 
@@ -362,6 +413,34 @@
     <script src="js/productdetail.js"></script>
     <script src="js/Navbar.js"></script>
     
+    <script>
+        // Show sticky cart when scrolling down
+        window.addEventListener('scroll', function() {
+            const stickyCart = document.querySelector('.mobile-sticky-cart');
+            const productActions = document.querySelector('.product-actions');
+            
+            if (window.scrollY > 300 && window.innerWidth < 768) {
+                stickyCart.classList.add('visible');
+            } else {
+                stickyCart.classList.remove('visible');
+            }
+        });
+        
+        // Sync sticky cart with main product info
+        document.addEventListener('DOMContentLoaded', function() {
+            const productName = document.getElementById('detail-product-name').textContent;
+            const productPrice = document.getElementById('detail-product-price').textContent;
+            const productImage = document.getElementById('main-product-image').src;
+            
+            document.getElementById('sticky-product-name').textContent = productName;
+            document.getElementById('sticky-product-price').textContent = productPrice;
+            document.getElementById('sticky-product-image').src = productImage;
+            
+            // Make sticky add to cart button work
+            document.querySelector('.sticky-add-to-cart').addEventListener('click', function() {
+                document.getElementById('detail-add-to-cart').click();
+            });
+        });
+    </script>
 </body>
 </html>
-`
