@@ -1,114 +1,6 @@
-// Product data - would typically come from a backend API
-// Using the same product data as inventory.js for consistency
-const products = [
-    {
-        id: 1,
-        name: "Wireless Headphones",
-        price: 199.99,
-        rating: 4.5,
-        reviews: 124,
-        category: "electronics",
-        image: "assets/placeholder.jpg",
-        description: "Premium wireless headphones with noise cancellation and high-fidelity sound. Perfect for music lovers and professionals.",
-        badge: "bestseller",
-        sku: "EL12345",
-        availability: true,
-        colors: ["black", "white", "blue"],
-        sizes: [], // NA for this product
-        specifications: {
-            "Bluetooth Version": "5.0",
-            "Battery Life": "Up to 30 hours",
-            "Noise Cancellation": "Active",
-            "Weight": "250g",
-            "Warranty": "2 years"
-        }
-    },
-    {
-        id: 2,
-        name: "Smart Watch",
-        price: 249.99,
-        rating: 4.2,
-        reviews: 89,
-        category: "electronics",
-        image: "assets/placeholder.jpg",
-        description: "Feature-rich smartwatch with heart rate monitoring, GPS tracking, and a beautiful AMOLED display.",
-        badge: "new",
-        sku: "EL67890",
-        availability: true,
-        colors: ["black", "silver", "rose gold"],
-        sizes: ["small", "medium", "large"],
-        specifications: {
-            "Display": "1.4\" AMOLED",
-            "Battery Life": "Up to 7 days",
-            "Water Resistance": "5 ATM",
-            "Sensors": "Heart rate, Accelerometer, GPS",
-            "Compatibility": "iOS 12+, Android 8.0+"
-        }
-    },
-    {
-        id: 3,
-        name: "Casual T-shirt",
-        price: 29.99,
-        rating: 4.0,
-        reviews: 210,
-        category: "clothing",
-        image: "assets/placeholder.jpg",
-        description: "Comfortable cotton t-shirt for everyday wear. Available in multiple colors and sizes.",
-        sku: "CL12345",
-        availability: true,
-        colors: ["black", "white", "blue", "red", "gray"],
-        sizes: ["S", "M", "L", "XL", "XXL"],
-        specifications: {
-            "Material": "100% Cotton",
-            "Care": "Machine washable",
-            "Style": "Crew neck",
-            "Fit": "Regular",
-            "Origin": "Made in USA"
-        }
-    },
-    {
-        id: 4,
-        name: "Coffee Maker",
-        price: 89.99,
-        rating: 4.7,
-        reviews: 156,
-        category: "home",
-        image: "assets/placeholder.jpg",
-        description: "Programmable coffee maker with timer and multiple brew settings. Makes up to 12 cups.",
-        sku: "HK45678",
-        availability: true,
-        colors: ["black", "white", "stainless steel"],
-        sizes: [],
-        specifications: {
-            "Capacity": "12 cups",
-            "Programmable": "Yes, 24-hour",
-            "Settings": "Light, Medium, Bold",
-            "Keep Warm": "2 hours auto-shutoff",
-            "Warranty": "1 year"
-        }
-    },
-    {
-        id: 5,
-        name: "Leather Wallet",
-        price: 49.99,
-        rating: 4.3,
-        reviews: 78,
-        category: "accessories",
-        image: "assets/placeholder.jpg",
-        description: "Genuine leather wallet with multiple card slots and coin pocket. Slim design for comfort.",
-        sku: "AC12345",
-        availability: false,
-        colors: ["brown", "black", "tan"],
-        sizes: [],
-        specifications: {
-            "Material": "Genuine Leather",
-            "Card Slots": "8",
-            "Bill Compartments": "2",
-            "Dimensions": "4.5\" x 3.5\"",
-            "RFID Blocking": "Yes"
-        }
-    }
-];
+// Use the products from Product.js
+// Access the products through the ProductService global object
+const products = window.ProductService.getAllProducts();
 
 // DOM Elements
 const productTitle = document.getElementById('detail-product-name');
@@ -156,8 +48,13 @@ function init() {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = parseInt(urlParams.get('id'));
     
+    console.log('Product ID from URL:', productId);
+    console.log('Available products:', products.length);
+    
     // If no ID provided, use the first product as a default
     currentProduct = products.find(p => p.id === productId) || products[0];
+    
+    console.log('Selected product:', currentProduct);
     
     if (currentProduct) {
         renderProductDetails();
@@ -165,12 +62,33 @@ function init() {
         loadRelatedProducts();
         loadFromLocalStorage();
         updateCart();
+        
+        // Add this product to recently viewed
+        addToRecentlyViewed(currentProduct.id);
     } else {
         // Handle product not found
         productTitle.textContent = 'Product Not Found';
         productDescription.textContent = 'The requested product could not be found.';
         addToCartBtn.disabled = true;
     }
+}
+
+// Add product to recently viewed
+function addToRecentlyViewed(productId) {
+    // Get recently viewed from localStorage
+    let recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
+    
+    // Remove the product if it's already in the list
+    recentlyViewed = recentlyViewed.filter(id => id !== productId);
+    
+    // Add the product to the beginning of the list
+    recentlyViewed.unshift(productId);
+    
+    // Keep only the last 5 products
+    recentlyViewed = recentlyViewed.slice(0, 5);
+    
+    // Save to localStorage
+    localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
 }
 
 // Render product details on the page
@@ -191,6 +109,22 @@ function renderProductDetails() {
     
     // Set product rating stars
     productRating.innerHTML = generateStarRating(currentProduct.rating);
+    
+    // Set product image
+    const mainProductImage = document.getElementById('main-product-image');
+    if (mainProductImage) {
+        mainProductImage.src = currentProduct.image;
+        mainProductImage.alt = currentProduct.name;
+    }
+    
+    // Update thumbnail images
+    const thumbnails = document.querySelectorAll('.thumbnail img');
+    if (thumbnails.length > 0) {
+        thumbnails.forEach(thumbnail => {
+            thumbnail.src = currentProduct.image;
+            thumbnail.alt = currentProduct.name;
+        });
+    }
     
     // Set availability
     if (currentProduct.availability) {
@@ -303,26 +237,9 @@ function renderProductDetails() {
     }
 }
 
-// Generate HTML for star ratings
+// Use the generateStarRating function from ProductService
 function generateStarRating(rating) {
-    let stars = '';
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
-    
-    for (let i = 0; i < fullStars; i++) {
-        stars += '<i class="fas fa-star"></i>';
-    }
-    
-    if (hasHalfStar) {
-        stars += '<i class="fas fa-star-half-alt"></i>';
-    }
-    
-    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-    for (let i = 0; i < emptyStars; i++) {
-        stars += '<i class="far fa-star"></i>';
-    }
-    
-    return stars;
+    return window.ProductService.generateStarRating(rating);
 }
 
 // Setup all event listeners
@@ -580,7 +497,7 @@ function loadRelatedProducts() {
                <a href="productdetail.html?id=${product.id}" class="product-link" data-id="${product.id}">
                 <div class="product-image-container">
                     ${badgeHtml}
-                    <img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="${product.name}" class="product-img">
+                    <img src="${product.image}" alt="${product.name}" class="product-img">
                     <div class="product-overlay">
                         <button class="quick-view-btn" data-id="${product.id}">
                             <i class="fas fa-eye"></i> Quick View

@@ -20,6 +20,13 @@
     --text-light: #999999;
     --border-color: #e1e4e8;
     --border-color-rgb: 225, 228, 232;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    --box-shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --box-shadow-sm: 0 3px 8px rgba(0, 0, 0, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    
+    /* Add these missing variables for light mode */
+    --primary-gradient: linear-gradient(135deg, var(--primary-color) 0%, #5a4fd6 100%);
     --shadow-color: rgba(0, 0, 0, 0.1);
     --box-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
     --box-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -63,7 +70,7 @@
     --container-padding: 1rem;
 }
 
-/* Dark Theme Variables */
+/* Dark mode variables - consolidated */
 [data-theme="dark"] {
     --primary-color: #6e85ff;
     --primary-color-rgb: 110, 133, 255;
@@ -86,6 +93,7 @@
     --box-shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.4);
     --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     --card-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+    --primary-gradient: linear-gradient(135deg, var(--primary-color) 0%, #5a4fd6 100%);
 }
 
 /* Reset and Base Styles */
@@ -324,6 +332,53 @@ nav {
     gap: var(--spacing-lg);
 }
 
+/* Search Bar */
+.search-container {
+    position: relative;
+    margin: 0 var(--spacing-lg);
+    flex-grow: 1;
+    max-width: 400px;
+}
+
+.search-container form {
+    display: flex;
+    width: 100%;
+}
+
+#search-input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-normal);
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.search-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    padding: 0 1rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.search-btn:hover {
+    color: var(--primary-color);
+}
+
 .nav-links a {
     color: var(--text-primary);
     font-weight: 600;
@@ -391,10 +446,14 @@ nav {
     transform: translateY(-2px);
 }
 
+.cart-icon {
+    position: relative;
+}
+
 .cart-count {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -5px;
+    right: -5px;
     background-color: var(--accent-color);
     color: white;
     font-size: var(--font-size-xs);
@@ -405,6 +464,7 @@ nav {
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .mobile-menu-btn {
@@ -559,7 +619,25 @@ footer {
 }
 
 /* Responsive */
+@media (max-width: 992px) {
+    .search-container {
+        max-width: 250px;
+    }
+}
+
 @media (max-width: 768px) {
+    header .container {
+        flex-wrap: wrap;
+    }
+    
+    nav {
+        order: 3;
+        width: 100%;
+        margin-left: 0;
+        margin-top: var(--spacing-sm);
+        justify-content: flex-end;
+    }
+    
     .nav-links {
         position: fixed;
         top: 0;
@@ -579,11 +657,24 @@ footer {
         left: 0;
     }
     
+    .search-container {
+        order: 2;
+        max-width: 100%;
+        margin: var(--spacing-sm) 0;
+        width: 100%;
+    }
+    
     .mobile-menu-btn {
         display: block;
     }
     
     .section-title {
         font-size: var(--font-size-xl);
+    }
+}
+
+@media (max-width: 576px) {
+    .nav-icons {
+        margin-left: auto;
     }
 }

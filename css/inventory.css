@@ -411,17 +411,17 @@
 /* Product Card Styling */
 .product-card {
     position: relative;
-    background-color: var(--card-bg);
+    background-color: var(--card-bg-color);
     border-radius: 16px;
     overflow: hidden;
     transition: all 0.3s ease;
     height: 100%;
-    box-shadow: 3px 3px 3px 3px var(--shadow-color);
+    box-shadow: var(--box-shadow);
 }
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow-hover);
 }
 
 .product-card-inner {

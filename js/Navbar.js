@@ -161,5 +161,12 @@ document.addEventListener('DOMContentLoaded', () => {
     loadFromLocalStorage();
     
     // Initialize other components as needed
-    init(); // If this function exists in your code
+    // Check if the initInventory function exists (for inventory page)
+    if (typeof window.initInventory === 'function') {
+        window.initInventory();
+    }
+    // Check if there might be an init function in the current page context
+    else if (typeof init === 'function') {
+        init();
+    }
 });

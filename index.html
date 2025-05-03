@@ -14,21 +14,29 @@
   <body>
     <header>
       <div class="container">
-        <a href="/"
-          ><div class="logo" style="cursor: pointer; color: blue;">
+        <a href="index.html"
+          ><div class="logo">
             <h1>ShopEase</h1>
           </div></a
         >
         <nav>
           <ul class="nav-links">
-            <li><a href="../index.html" class="active">Home</a></li>
-            <li><a href="../inventory.html">Shop</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="inventory.html">Shop</a></li>
           </ul>
+          <div class="search-container">
+            <form id="search-form" action="inventory.html" method="get">
+              <input type="text" id="search-input" name="search" placeholder="Search products...">
+              <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i>
+              </button>
+            </form>
+          </div>
           <div class="nav-icons">
             <button id="theme-toggle" aria-label="Toggle dark mode">
               <i class="fas fa-moon"></i>
             </button>
-
+           
             <div class="mobile-menu-btn" aria-label="Toggle menu">
               <i class="fas fa-bars"></i>
             </div>

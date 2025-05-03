@@ -1,446 +1,571 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ShopEase - Product Detail</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/productdetail.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/productdetail.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
     <header>
-        <div class="container">
-            <div class="logo">
-                <h1>ShopEase</h1>
+      <div class="container">
+        <a href="index.html">
+          <div class="logo">
+            <h1>ShopEase</h1>
+          </div>
+        </a>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="inventory.html" class="active">Shop</a></li>
+          </ul>
+          <div class="search-container">
+            <form id="search-form" action="inventory.html" method="get">
+              <input
+                type="text"
+                id="search-input"
+                name="search"
+                placeholder="Search products..."
+              />
+              <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i>
+              </button>
+            </form>
+          </div>
+          <div class="nav-icons">
+            <button id="theme-toggle" aria-label="Toggle dark mode">
+              <i class="fas fa-moon"></i>
+            </button>
+            
+            <div class="mobile-menu-btn" aria-label="Toggle menu">
+              <i class="fas fa-bars"></i>
             </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="inventory.html" class="active">Shop</a></li>
-                </ul>
-                <div class="nav-icons">
-                    <button id="theme-toggle" aria-label="Toggle dark mode">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    
-                    <button class="mobile-menu-btn" aria-label="Toggle menu">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </nav>
-        </div>
+          </div>
+        </nav>
+      </div>
     </header>
 
     <main>
-        <section class="page-header">
-            <div class="container">
-                <h1 id="product-title">Product Details</h1>
-                <div class="breadcrumb">
-                    <a href="index.html"><i class="fas fa-home"></i> Home</a> / 
-                    <a href="inventory.html"><i class="fas fa-store"></i> Shop</a> / 
-                    <span id="breadcrumb-product"><i class="fas fa-tag"></i> Product</span>
-                </div>
-            </div>
-        </section>
+      <section class="page-header">
+        <div class="container">
+          <h1 id="product-title">Product Details</h1>
+          <div class="breadcrumb">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a> /
+            <a href="inventory.html"><i class="fas fa-store"></i> Shop</a> /
+            <span id="breadcrumb-product"
+              ><i class="fas fa-tag"></i> Product</span
+            >
+          </div>
+        </div>
+      </section>
 
-        <section class="product-detail-section">
-            <div class="container">
-                <div class="product-detail-container">
-                    <div class="product-gallery">
-                        <div class="main-image">
-                            <!-- <div class="image-placeholder" id="main-product-image"></div> -->
-                            <img class="image-placeholder" id="main-product-image" src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740" alt="">
-                            <span class="product-badge" id="product-badge"><i class="fas fa-fire"></i> New Arrival</span>
-                        </div>
-                        <div class="thumbnail-gallery">
-                            <div class="thumbnail active">
-                                <img class="image-placeholder" src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740" alt="">
-                            </div>
-                            <div class="thumbnail">
-                                <!-- <div ></div> -->
-                                <img class="image-placeholder" src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740" alt="">
-                            </div>
-                            <div class="thumbnail">
-                                <img src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740" class="image-placeholder" alt="">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-info">
-                        <h1 id="detail-product-name">Product Name</h1>
-                        <div class="product-rating">
-                            <div class="stars" id="detail-product-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span id="detail-product-reviews">(125 Reviews)</span>
-                        </div>
-                        <p class="product-price" id="detail-product-price">$299.99</p>
-                        
-                        <div class="product-description">
-                            <h3>Description</h3>
-                            <p id="detail-product-description">This premium product offers exceptional quality and features that will exceed your expectations. Perfect for everyday use with its sleek design and durable construction.</p>
-                        </div>
-                        
-                        <div class="product-variations">
-                            <div class="variation-group">
-                                <h3>Color</h3>
-                                <div class="color-options">
-                                    <button class="color-option active" data-color="black" style="background-color: #000;"></button>
-                                    <button class="color-option" data-color="white" style="background-color: #fff;"></button>
-                                    <button class="color-option" data-color="blue" style="background-color: #0057ff;"></button>
-                                    <button class="color-option" data-color="red" style="background-color: #ff0000;"></button>
-                                </div>
-                            </div>
-                            
-                            <div class="variation-group">
-                                <h3>Size</h3>
-                                <div class="size-options">
-                                    <button class="size-option">S</button>
-                                    <button class="size-option active">M</button>
-                                    <button class="size-option">L</button>
-                                    <button class="size-option">XL</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-actions">
-                            <div class="quantity-selector">
-                                <button class="qty-btn minus" aria-label="Decrease quantity">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <input type="number" min="1" value="1" id="product-quantity" class="qty-input">
-                                <button class="qty-btn plus" aria-label="Increase quantity">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                            <button class="btn btn-primary add-to-cart-btn" id="detail-add-to-cart">
-                                <i class="fas fa-shopping-cart"></i> Add to Cart
-                            </button>
-                            <button class="btn btn-outlined wishlist-btn">
-                                <i class="far fa-heart"></i> Add to Wishlist
-                            </button>
-                            <button class="btn btn-text" title="Compare">
-                                <i class="fas fa-exchange-alt"></i> Compare
-                            </button>
-                        </div>
-                        
-                        <div class="product-meta">
-                            <p><strong><i class="fas fa-barcode"></i> SKU:</strong> <span id="product-sku">PR12345</span></p>
-                            <p><strong><i class="fas fa-tags"></i> Category:</strong> <span id="product-category">Electronics</span></p>
-                            <p><strong><i class="fas fa-box-open"></i> Availability:</strong> <span id="product-availability" class="in-stock">In Stock</span></p>
-                            <p><strong><i class="fas fa-truck"></i> Shipping:</strong> <span>Free shipping</span></p>
-                        </div>
-                        
-                        <div class="quick-buy-options">
-                            <h3><i class="fas fa-bolt"></i> Quick Buy Options</h3>
-                            <div class="payment-options">
-                                <button class="payment-option"><i class="fab fa-paypal"></i> PayPal</button>
-                                <button class="payment-option"><i class="fab fa-apple-pay"></i> Apple Pay</button>
-                                <button class="payment-option"><i class="fab fa-google-pay"></i> Google Pay</button>
-                            </div>
-                        </div>
-                        
-                        <div class="product-guarantees">
-                            <div class="guarantee-item">
-                                <i class="fas fa-shield-alt"></i>
-                                <div>
-                                    <h4>100% Secure Payment</h4>
-                                    <p>All major credit cards accepted</p>
-                                </div>
-                            </div>
-                            <div class="guarantee-item">
-                                <i class="fas fa-exchange-alt"></i>
-                                <div>
-                                    <h4>30-Day Returns</h4>
-                                    <p>Easy return policy</p>
-                                </div>
-                            </div>
-                            <div class="guarantee-item">
-                                <i class="fas fa-truck"></i>
-                                <div>
-                                    <h4>Free Shipping</h4>
-                                    <p>On orders over $50</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="social-sharing">
-                            <h3>Share this product</h3>
-                            <div class="social-icons">
-                                <a href="#" aria-label="Share on Facebook"><i class="fab fa-facebook"></i></a>
-                                <a href="#" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></a>
-                                <a href="#" aria-label="Share on Instagram"><i class="fab fa-instagram"></i></a>
-                                <a href="#" aria-label="Share on Pinterest"><i class="fab fa-pinterest"></i></a>
-                            </div>
-                        </div>
-                    </div>
+      <section class="product-detail-section">
+        <div class="container">
+          <div class="product-detail-container">
+            <div class="product-gallery">
+              <div class="main-image">
+                <!-- <div class="image-placeholder" id="main-product-image"></div> -->
+                <img
+                  class="image-placeholder"
+                  id="main-product-image"
+                  src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740"
+                  alt=""
+                />
+                <span class="product-badge" id="product-badge"
+                  ><i class="fas fa-fire"></i> New Arrival</span
+                >
+              </div>
+              <div class="thumbnail-gallery">
+                <div class="thumbnail active">
+                  <img
+                    class="image-placeholder"
+                    src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740"
+                    alt=""
+                  />
                 </div>
-                
-                <div class="product-tabs">
-                    <div class="tabs-header">
-                        <button class="tab-btn active" data-tab="description">Description</button>
-                        <button class="tab-btn" data-tab="specifications">Specifications</button>
-                        <button class="tab-btn" data-tab="reviews">Reviews</button>
-                    </div>
-                    <div class="tabs-content">
-                        <div class="tab-panel active" id="description-tab">
-                            <h3>Product Description</h3>
-                            <p id="full-product-description">
-                                Experience premium quality with our latest product offering. Designed with the modern consumer in mind, this product combines functionality with elegant design.
-                            </p>
-                            <p>
-                                Key Features:
-                            </p>
-                            <ul>
-                                <li>Premium materials for durability</li>
-                                <li>Ergonomic design for comfort</li>
-                                <li>Versatile functionality for various needs</li>
-                                <li>Energy efficient operation</li>
-                            </ul>
-                        </div>
-                        <div class="tab-panel" id="specifications-tab">
-                            <h3>Product Specifications</h3>
-                            <table class="specs-table">
-                                <tr>
-                                    <th>Dimension</th>
-                                    <td>10" x 8" x 3"</td>
-                                </tr>
-                                <tr>
-                                    <th>Weight</th>
-                                    <td>1.2 lbs</td>
-                                </tr>
-                                <tr>
-                                    <th>Materials</th>
-                                    <td>High-grade aluminum, premium plastic</td>
-                                </tr>
-                                <tr>
-                                    <th>Warranty</th>
-                                    <td>1 Year limited warranty</td>
-                                </tr>
-                                <tr>
-                                    <th>Made In</th>
-                                    <td>USA</td>
-                                </tr>
-                                <tr>
-                                    <th>Certification</th>
-                                    <td>CE, RoHS Compliant</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="tab-panel" id="reviews-tab">
-                            <h3>Customer Reviews</h3>
-                            <div class="reviews-summary">
-                                <div class="average-rating">
-                                    <span class="rating-number">4.5</span>
-                                    <div class="stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                    <span>Based on 125 reviews</span>
-                                </div>
-                                <div class="rating-distribution">
-                                    <div class="rating-bar">
-                                        <span>5 star</span>
-                                        <div class="bar-container">
-                                            <div class="bar" style="width: 70%"></div>
-                                        </div>
-                                        <span>70%</span>
-                                    </div>
-                                    <div class="rating-bar">
-                                        <span>4 star</span>
-                                        <div class="bar-container">
-                                            <div class="bar" style="width: 20%"></div>
-                                        </div>
-                                        <span>20%</span>
-                                    </div>
-                                    <div class="rating-bar">
-                                        <span>3 star</span>
-                                        <div class="bar-container">
-                                            <div class="bar" style="width: 5%"></div>
-                                        </div>
-                                        <span>5%</span>
-                                    </div>
-                                    <div class="rating-bar">
-                                        <span>2 star</span>
-                                        <div class="bar-container">
-                                            <div class="bar" style="width: 3%"></div>
-                                        </div>
-                                        <span>3%</span>
-                                    </div>
-                                    <div class="rating-bar">
-                                        <span>1 star</span>
-                                        <div class="bar-container">
-                                            <div class="bar" style="width: 2%"></div>
-                                        </div>
-                                        <span>2%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="customer-reviews">
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="reviewer-info">
-                                            <h4>John D.</h4>
-                                            <div class="stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <span class="review-date">April 15, 2025</span>
-                                    </div>
-                                    <p class="review-content">
-                                        Absolutely love this product! The quality is outstanding and it works even better than I expected. Would definitely recommend to anyone looking for a reliable product.
-                                    </p>
-                                </div>
-                                
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="reviewer-info">
-                                            <h4>Sarah M.</h4>
-                                            <div class="stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <span class="review-date">April 10, 2025</span>
-                                    </div>
-                                    <p class="review-content">
-                                        Great product overall. The only reason I'm giving it 4 stars instead of 5 is because shipping took longer than expected. Otherwise, the product itself is perfect!
-                                    </p>
-                                </div>
-                                
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="reviewer-info">
-                                            <h4>Michael T.</h4>
-                                            <div class="stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star-half-alt"></i>
-                                            </div>
-                                        </div>
-                                        <span class="review-date">April 3, 2025</span>
-                                    </div>
-                                    <p class="review-content">
-                                        This product exceeded my expectations. The build quality is excellent and the functionality is just what I needed. I've already recommended it to several friends.
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div class="write-review">
-                                <h3>Write a Review</h3>
-                                <form class="review-form">
-                                    <div class="form-group">
-                                        <label for="reviewer-name">Your Name</label>
-                                        <input type="text" id="reviewer-name" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="reviewer-email">Your Email</label>
-                                        <input type="email" id="reviewer-email" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Your Rating</label>
-                                        <div class="rating-input">
-                                            <i class="far fa-star" data-rating="1"></i>
-                                            <i class="far fa-star" data-rating="2"></i>
-                                            <i class="far fa-star" data-rating="3"></i>
-                                            <i class="far fa-star" data-rating="4"></i>
-                                            <i class="far fa-star" data-rating="5"></i>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="review-content">Your Review</label>
-                                        <textarea id="review-content" rows="5" required></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit Review</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                <div class="thumbnail">
+                  <!-- <div ></div> -->
+                  <img
+                    class="image-placeholder"
+                    src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740"
+                    alt=""
+                  />
                 </div>
-                
-                <section class="related-products">
-                    <h2>Related Products</h2>
-                    <div class="products-grid" id="related-products-container">
-                        
-                    </div>
-                </section>
+                <div class="thumbnail">
+                  <img
+                    src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740"
+                    class="image-placeholder"
+                    alt=""
+                  />
+                </div>
+              </div>
             </div>
-        </section>
+
+            <div class="product-info">
+              <h1 id="detail-product-name">Product Name</h1>
+              <div class="product-rating">
+                <div class="stars" id="detail-product-stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span id="detail-product-reviews">(125 Reviews)</span>
+              </div>
+              <p class="product-price" id="detail-product-price">$299.99</p>
+
+              <div class="product-description">
+                <h3>Description</h3>
+                <p id="detail-product-description">
+                  This premium product offers exceptional quality and features
+                  that will exceed your expectations. Perfect for everyday use
+                  with its sleek design and durable construction.
+                </p>
+              </div>
+
+              <div class="product-variations">
+                <div class="variation-group">
+                  <h3>Color</h3>
+                  <div class="color-options">
+                    <button
+                      class="color-option active"
+                      data-color="black"
+                      style="background-color: #000"
+                    ></button>
+                    <button
+                      class="color-option"
+                      data-color="white"
+                      style="background-color: #fff"
+                    ></button>
+                    <button
+                      class="color-option"
+                      data-color="blue"
+                      style="background-color: #0057ff"
+                    ></button>
+                    <button
+                      class="color-option"
+                      data-color="red"
+                      style="background-color: #ff0000"
+                    ></button>
+                  </div>
+                </div>
+
+                <div class="variation-group">
+                  <h3>Size</h3>
+                  <div class="size-options">
+                    <button class="size-option">S</button>
+                    <button class="size-option active">M</button>
+                    <button class="size-option">L</button>
+                    <button class="size-option">XL</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="product-actions">
+                <div class="quantity-selector">
+                  <button class="qty-btn minus" aria-label="Decrease quantity">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <input
+                    type="number"
+                    min="1"
+                    value="1"
+                    id="product-quantity"
+                    class="qty-input"
+                  />
+                  <button class="qty-btn plus" aria-label="Increase quantity">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+                <button
+                  class="btn btn-primary add-to-cart-btn"
+                  id="detail-add-to-cart"
+                  style="font-size: 0.8rem;"
+                >
+                  <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+                <button class="btn btn-outlined wishlist-btn" style="font-size: 0.8rem;">
+                  <i class="far fa-heart"></i> Add to Wishlist
+                </button>
+              </div>
+
+              <div class="product-meta">
+                <p>
+                  <strong><i class="fas fa-barcode"></i> SKU:</strong>
+                  <span id="product-sku">PR12345</span>
+                </p>
+                <p>
+                  <strong><i class="fas fa-tags"></i> Category:</strong>
+                  <span id="product-category">Electronics</span>
+                </p>
+                <p>
+                  <strong><i class="fas fa-box-open"></i> Availability:</strong>
+                  <span id="product-availability" class="in-stock"
+                    >In Stock</span
+                  >
+                </p>
+                <p>
+                  <strong><i class="fas fa-truck"></i> Shipping:</strong>
+                  <span>Free shipping</span>
+                </p>
+              </div>
+
+              <div class="quick-buy-options">
+                <h3><i class="fas fa-bolt"></i> Quick Buy Options</h3>
+                <div class="payment-options">
+                  <button class="payment-option">
+                    <i class="fab fa-paypal"></i> PayPal
+                  </button>
+                  <button class="payment-option">
+                    <i class="fab fa-apple-pay"></i> Apple Pay
+                  </button>
+                  <button class="payment-option">
+                    <i class="fab fa-google-pay"></i> Google Pay
+                  </button>
+                </div>
+              </div>
+
+              <div class="product-guarantees">
+                <div class="guarantee-item">
+                  <i class="fas fa-shield-alt"></i>
+                  <div>
+                    <h4>100% Secure Payment</h4>
+                    <p>All major credit cards accepted</p>
+                  </div>
+                </div>
+                <div class="guarantee-item">
+                  <i class="fas fa-exchange-alt"></i>
+                  <div>
+                    <h4>30-Day Returns</h4>
+                    <p>Easy return policy</p>
+                  </div>
+                </div>
+                <div class="guarantee-item">
+                  <i class="fas fa-truck"></i>
+                  <div>
+                    <h4>Free Shipping</h4>
+                    <p>On orders over $50</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="social-sharing">
+                <h3>Share this product</h3>
+                <div class="social-icons">
+                  <a href="#" aria-label="Share on Facebook"
+                    ><i class="fab fa-facebook"></i
+                  ></a>
+                  <a href="#" aria-label="Share on Twitter"
+                    ><i class="fab fa-twitter"></i
+                  ></a>
+                  <a href="#" aria-label="Share on Instagram"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                  <a href="#" aria-label="Share on Pinterest"
+                    ><i class="fab fa-pinterest"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-tabs">
+            <div class="tabs-header">
+              <button class="tab-btn active" data-tab="description">
+                Description
+              </button>
+              <button class="tab-btn" data-tab="specifications">
+                Specifications
+              </button>
+              <button class="tab-btn" data-tab="reviews">Reviews</button>
+            </div>
+            <div class="tabs-content">
+              <div class="tab-panel active" id="description-tab">
+                <h3>Product Description</h3>
+                <p id="full-product-description">
+                  Experience premium quality with our latest product offering.
+                  Designed with the modern consumer in mind, this product
+                  combines functionality with elegant design.
+                </p>
+                <p>Key Features:</p>
+                <ul>
+                  <li>Premium materials for durability</li>
+                  <li>Ergonomic design for comfort</li>
+                  <li>Versatile functionality for various needs</li>
+                  <li>Energy efficient operation</li>
+                </ul>
+              </div>
+              <div class="tab-panel" id="specifications-tab">
+                <h3>Product Specifications</h3>
+                <table class="specs-table">
+                  <tr>
+                    <th>Dimension</th>
+                    <td>10" x 8" x 3"</td>
+                  </tr>
+                  <tr>
+                    <th>Weight</th>
+                    <td>1.2 lbs</td>
+                  </tr>
+                  <tr>
+                    <th>Materials</th>
+                    <td>High-grade aluminum, premium plastic</td>
+                  </tr>
+                  <tr>
+                    <th>Warranty</th>
+                    <td>1 Year limited warranty</td>
+                  </tr>
+                  <tr>
+                    <th>Made In</th>
+                    <td>USA</td>
+                  </tr>
+                  <tr>
+                    <th>Certification</th>
+                    <td>CE, RoHS Compliant</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="tab-panel" id="reviews-tab">
+                <h3>Customer Reviews</h3>
+                <div class="reviews-summary">
+                  <div class="average-rating">
+                    <span class="rating-number">4.5</span>
+                    <div class="stars">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span>Based on 125 reviews</span>
+                  </div>
+                  <div class="rating-distribution">
+                    <div class="rating-bar">
+                      <span>5 star</span>
+                      <div class="bar-container">
+                        <div class="bar" style="width: 70%"></div>
+                      </div>
+                      <span>70%</span>
+                    </div>
+                    <div class="rating-bar">
+                      <span>4 star</span>
+                      <div class="bar-container">
+                        <div class="bar" style="width: 20%"></div>
+                      </div>
+                      <span>20%</span>
+                    </div>
+                    <div class="rating-bar">
+                      <span>3 star</span>
+                      <div class="bar-container">
+                        <div class="bar" style="width: 5%"></div>
+                      </div>
+                      <span>5%</span>
+                    </div>
+                    <div class="rating-bar">
+                      <span>2 star</span>
+                      <div class="bar-container">
+                        <div class="bar" style="width: 3%"></div>
+                      </div>
+                      <span>3%</span>
+                    </div>
+                    <div class="rating-bar">
+                      <span>1 star</span>
+                      <div class="bar-container">
+                        <div class="bar" style="width: 2%"></div>
+                      </div>
+                      <span>2%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="customer-reviews">
+                  <div class="review-item">
+                    <div class="review-header">
+                      <div class="reviewer-info">
+                        <h4>John D.</h4>
+                        <div class="stars">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                        </div>
+                      </div>
+                      <span class="review-date">April 15, 2025</span>
+                    </div>
+                    <p class="review-content">
+                      Absolutely love this product! The quality is outstanding
+                      and it works even better than I expected. Would definitely
+                      recommend to anyone looking for a reliable product.
+                    </p>
+                  </div>
+
+                  <div class="review-item">
+                    <div class="review-header">
+                      <div class="reviewer-info">
+                        <h4>Sarah M.</h4>
+                        <div class="stars">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </div>
+                      </div>
+                      <span class="review-date">April 10, 2025</span>
+                    </div>
+                    <p class="review-content">
+                      Great product overall. The only reason I'm giving it 4
+                      stars instead of 5 is because shipping took longer than
+                      expected. Otherwise, the product itself is perfect!
+                    </p>
+                  </div>
+
+                  <div class="review-item">
+                    <div class="review-header">
+                      <div class="reviewer-info">
+                        <h4>Michael T.</h4>
+                        <div class="stars">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star-half-alt"></i>
+                        </div>
+                      </div>
+                      <span class="review-date">April 3, 2025</span>
+                    </div>
+                    <p class="review-content">
+                      This product exceeded my expectations. The build quality
+                      is excellent and the functionality is just what I needed.
+                      I've already recommended it to several friends.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="write-review">
+                  <h3>Write a Review</h3>
+                  <form class="review-form">
+                    <div class="form-group">
+                      <label for="reviewer-name">Your Name</label>
+                      <input type="text" id="reviewer-name" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="reviewer-email">Your Email</label>
+                      <input type="email" id="reviewer-email" required />
+                    </div>
+                    <div class="form-group">
+                      <label>Your Rating</label>
+                      <div class="rating-input">
+                        <i class="far fa-star" data-rating="1"></i>
+                        <i class="far fa-star" data-rating="2"></i>
+                        <i class="far fa-star" data-rating="3"></i>
+                        <i class="far fa-star" data-rating="4"></i>
+                        <i class="far fa-star" data-rating="5"></i>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="review-content">Your Review</label>
+                      <textarea
+                        id="review-content"
+                        rows="5"
+                        required
+                      ></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                      Submit Review
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <section class="related-products">
+            <h2>Related Products</h2>
+            <div class="products-grid" id="related-products-container"></div>
+          </section>
+        </div>
+      </section>
     </main>
 
     <!-- Mobile Sticky Add to Cart -->
     <div class="mobile-sticky-cart">
-        <div class="sticky-product-info">
-            <img id="sticky-product-image" src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740" alt="">
-            <div>
-                <h4 id="sticky-product-name">Product Name</h4>
-                <p id="sticky-product-price">$299.99</p>
-            </div>
+      <div class="sticky-product-info">
+        <img
+          id="sticky-product-image"
+          src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740"
+          alt=""
+        />
+        <div>
+          <h4 id="sticky-product-name">Product Name</h4>
+          <p id="sticky-product-price">$299.99</p>
         </div>
-        <button class="btn btn-primary sticky-add-to-cart">
-            <i class="fas fa-shopping-cart"></i> Add to Cart
-        </button>
+      </div>
+      <button class="btn btn-primary sticky-add-to-cart">
+        <i class="fas fa-shopping-cart"></i> Add to Cart
+      </button>
     </div>
 
     <!-- Footer Section -->
     <div id="footer-placeholder"></div>
 
-      <script>
-        document.getElementById("footer-placeholder").innerHTML = fetch("components/Footer.html")
-      .then(res => res.text())
-      .then(html => document.getElementById("footer-placeholder").innerHTML = html)
+    <script>
+      document.getElementById("footer-placeholder").innerHTML = fetch(
+        "components/Footer.html"
+      )
+        .then((res) => res.text())
+        .then(
+          (html) =>
+            (document.getElementById("footer-placeholder").innerHTML = html)
+        );
     </script>
 
-    
+    <script src="js/Product.js"></script>
     <script src="js/productdetail.js"></script>
     <script src="js/Navbar.js"></script>
-    
+
     <script>
-        // Show sticky cart when scrolling down
-        window.addEventListener('scroll', function() {
-            const stickyCart = document.querySelector('.mobile-sticky-cart');
-            const productActions = document.querySelector('.product-actions');
-            
-            if (window.scrollY > 300 && window.innerWidth < 768) {
-                stickyCart.classList.add('visible');
-            } else {
-                stickyCart.classList.remove('visible');
-            }
-        });
-        
-        // Sync sticky cart with main product info
-        document.addEventListener('DOMContentLoaded', function() {
-            const productName = document.getElementById('detail-product-name').textContent;
-            const productPrice = document.getElementById('detail-product-price').textContent;
-            const productImage = document.getElementById('main-product-image').src;
-            
-            document.getElementById('sticky-product-name').textContent = productName;
-            document.getElementById('sticky-product-price').textContent = productPrice;
-            document.getElementById('sticky-product-image').src = productImage;
-            
-            // Make sticky add to cart button work
-            document.querySelector('.sticky-add-to-cart').addEventListener('click', function() {
-                document.getElementById('detail-add-to-cart').click();
-            });
-        });
+      // Show sticky cart when scrolling down
+      window.addEventListener("scroll", function () {
+        const stickyCart = document.querySelector(".mobile-sticky-cart");
+        const productActions = document.querySelector(".product-actions");
+
+        if (window.scrollY > 300 && window.innerWidth < 768) {
+          stickyCart.classList.add("visible");
+        } else {
+          stickyCart.classList.remove("visible");
+        }
+      });
+
+      // Sync sticky cart with main product info
+      document.addEventListener("DOMContentLoaded", function () {
+        const productName = document.getElementById(
+          "detail-product-name"
+        ).textContent;
+        const productPrice = document.getElementById(
+          "detail-product-price"
+        ).textContent;
+        const productImage = document.getElementById("main-product-image").src;
+
+        document.getElementById("sticky-product-name").textContent =
+          productName;
+        document.getElementById("sticky-product-price").textContent =
+          productPrice;
+        document.getElementById("sticky-product-image").src = productImage;
+
+        // Make sticky add to cart button work
+        document
+          .querySelector(".sticky-add-to-cart")
+          .addEventListener("click", function () {
+            document.getElementById("detail-add-to-cart").click();
+          });
+      });
     </script>
-</body>
+  </body>
 </html>
