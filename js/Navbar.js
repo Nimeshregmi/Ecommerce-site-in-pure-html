@@ -137,6 +137,12 @@ function initNavbar() {
         });
     }
     
+    // Search functionality
+    const searchForm = document.getElementById('search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', handleSearch);
+    }
+    
     // Highlight active page
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll('.nav-link');
@@ -147,6 +153,31 @@ function initNavbar() {
             link.classList.add('active');
         }
     });
+}
+
+/**
+ * Handle search form submission without page reload
+ * @param {Event} e - The form submit event
+ */
+function handleSearch(e) {
+    e.preventDefault();
+    
+    const searchInput = document.getElementById('search-input');
+    const searchTerm = searchInput.value.trim();
+    
+    if (!searchTerm) return;
+    
+    // If we're already on the inventory page, perform search without navigation
+    if (window.location.pathname.includes('inventory.html')) {
+        if (typeof window.performSearch === 'function') {
+            window.performSearch(searchTerm);
+        } else {
+            console.warn('Search function not available on this page');
+        }
+    } else {
+        // If on other pages, navigate to inventory with search parameter
+        window.location.href = `inventory.html?search=${encodeURIComponent(searchTerm)}`;
+    }
 }
 
 // Initialize everything when DOM is loaded

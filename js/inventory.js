@@ -35,6 +35,55 @@ const modalQtyBtns = document.querySelectorAll('.quantity-selector .qty-btn');
 const modalAddToCartBtn = document.querySelector('.modal-body .add-to-cart-btn');
 const checkoutBtn = document.querySelector('.checkout-btn');
 
+// Export search function for navbar to use
+window.performSearch = function(searchTerm) {
+    if (searchTerm) {
+        // Filter products based on search term
+        currentProducts = inventoryProducts.filter(product => 
+            product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            product.category.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        
+        // Reset filters and pagination
+        currentFilters = {
+            categories: [],
+            minPrice: 0,
+            maxPrice: 1000,
+            rating: 0
+        };
+        currentPage = 1;
+        
+        // Update UI
+        renderProducts(currentProducts, currentPage);
+        updatePagination();
+        
+        // Update filter UI
+        categoryCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        ratingRadios.forEach(radio => {
+            radio.checked = false;
+        });
+        minPriceInput.value = 0;
+        maxPriceInput.value = 1000;
+        minRangeInput.value = 0;
+        maxRangeInput.value = 1000;
+        setupRangeSlider();
+        
+        // Update the search input field with the search term
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.value = searchTerm;
+        }
+    } else {
+        // If search is empty, show all products
+        currentProducts = [...inventoryProducts];
+        renderProducts(currentProducts, currentPage);
+        updatePagination();
+    }
+};
+
 // Current state
 let currentProducts = [...inventoryProducts];
 let currentView = 'grid';
@@ -244,6 +293,63 @@ function setupRangeSlider() {
     });
 }
 
+// Handle price input changes (from number inputs)
+function handlePriceInputChange() {
+    let minValue = parseFloat(minPriceInput.value);
+    let maxValue = parseFloat(maxPriceInput.value);
+    
+    // Validate values
+    if (isNaN(minValue)) minValue = 0;
+    if (isNaN(maxValue)) maxValue = 1000;
+    
+    // Ensure min doesn't exceed max
+    if (minValue > maxValue) {
+        minValue = maxValue;
+        minPriceInput.value = minValue;
+    }
+    
+    // Update range inputs
+    minRangeInput.value = minValue;
+    maxRangeInput.value = maxValue;
+    
+    currentFilters.minPrice = minValue;
+    currentFilters.maxPrice = maxValue;
+    
+    setupRangeSlider(); // Update the visual slider
+    
+    // Apply filters immediately
+    applyFilters();
+}
+
+// Handle range slider changes
+function handleRangeInputChange() {
+    let minValue = parseFloat(minRangeInput.value);
+    let maxValue = parseFloat(maxRangeInput.value);
+    
+    // Ensure min doesn't exceed max
+    if (minValue > maxValue) {
+        if (this === minRangeInput) {
+            minValue = maxValue;
+            minRangeInput.value = minValue;
+        } else {
+            maxValue = minValue;
+            maxRangeInput.value = maxValue;
+        }
+    }
+    
+    // Update text inputs
+    minPriceInput.value = minValue;
+    maxPriceInput.value = maxValue;
+    
+    currentFilters.minPrice = minValue;
+    currentFilters.maxPrice = maxValue;
+    
+    setupRangeSlider(); // Update the visual slider
+    
+    // Apply filters immediately
+    applyFilters();
+}
+
 // Use the generateStarRating function from ProductService
 function generateStarRating(rating) {
     return window.ProductService.generateStarRating(rating);
@@ -275,8 +381,7 @@ function setupEventListeners() {
     minRangeInput.addEventListener('input', handleRangeInputChange);
     maxRangeInput.addEventListener('input', handleRangeInputChange);
     
-    // Apply/Clear filters
-    applyFiltersBtn.addEventListener('click', applyFilters);
+    // Clear filters
     clearFiltersBtn.addEventListener('click', clearFilters);
     
     // Modal and overlay
@@ -334,16 +439,22 @@ function setupEventListeners() {
     });
     
     // Cart
-    closeCartBtn.addEventListener('click', closeCart);
-    document.querySelector('.cart-icon').addEventListener('click', function(e) {
-        e.preventDefault();
-        openCart();
-    });
+    if (closeCartBtn) {
+        closeCartBtn.addEventListener('click', closeCart);
+    }
+    
+    const cartIcon = document.querySelector('.cart-icon');
+    if (cartIcon) {
+        cartIcon.addEventListener('click', function(e) {
+            e.preventDefault();
+            openCart();
+        });
+    }
     
     // Checkout button
-    checkoutBtn.addEventListener('click', handleCheckout);
-    
-    // Checkout button event listener already set above
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', handleCheckout);
+    }
 }
 
 // Sort products
@@ -405,6 +516,8 @@ function handleCategoryFilter() {
         .map(checkbox => checkbox.value);
     
     currentFilters.categories = selectedCategories;
+    // Apply filters immediately without requiring the Apply button
+    applyFilters();
 }
 
 // Handle rating filter changes
@@ -427,57 +540,8 @@ function handleRatingFilter(e) {
         default:
             currentFilters.rating = 0;
     }
-}
-
-// Handle price input changes (from number inputs)
-function handlePriceInputChange() {
-    let minValue = parseFloat(minPriceInput.value);
-    let maxValue = parseFloat(maxPriceInput.value);
-    
-    // Validate values
-    if (isNaN(minValue)) minValue = 0;
-    if (isNaN(maxValue)) maxValue = 1000;
-    
-    // Ensure min doesn't exceed max
-    if (minValue > maxValue) {
-        minValue = maxValue;
-        minPriceInput.value = minValue;
-    }
-    
-    // Update range inputs
-    minRangeInput.value = minValue;
-    maxRangeInput.value = maxValue;
-    
-    currentFilters.minPrice = minValue;
-    currentFilters.maxPrice = maxValue;
-    
-    setupRangeSlider(); // Update the visual slider
-}
-
-// Handle range slider changes
-function handleRangeInputChange() {
-    let minValue = parseFloat(minRangeInput.value);
-    let maxValue = parseFloat(maxRangeInput.value);
-    
-    // Ensure min doesn't exceed max
-    if (minValue > maxValue) {
-        if (this === minRangeInput) {
-            minValue = maxValue;
-            minRangeInput.value = minValue;
-        } else {
-            maxValue = minValue;
-            maxRangeInput.value = maxValue;
-        }
-    }
-    
-    // Update text inputs
-    minPriceInput.value = minValue;
-    maxPriceInput.value = maxValue;
-    
-    currentFilters.minPrice = minValue;
-    currentFilters.maxPrice = maxValue;
-    
-    setupRangeSlider(); // Update the visual slider
+    // Apply filters immediately
+    applyFilters();
 }
 
 // Apply all current filters
