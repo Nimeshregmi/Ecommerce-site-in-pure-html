@@ -107,7 +107,7 @@
 
             <div class="product-info">
               <h1 id="detail-product-name">Product Name</h1>
-              <div class="product-rating">
+              <div style="display: flex; align-items: center; justify-content: start; margin-bottom: 20px ; gap: 20px;"><div class="product-ratings">
                 <div class="stars" id="detail-product-stars">
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
@@ -117,7 +117,7 @@
                 </div>
                 <span id="detail-product-reviews">(125 Reviews)</span>
               </div>
-              <p class="product-price" id="detail-product-price">$299.99</p>
+              <p class="product-price" id="detail-product-price">$299.99</p></div>
 
               <div class="product-description">
                 <h3>Description</h3>
@@ -164,6 +164,18 @@
                     <button class="size-option">XL</button>
                   </div>
                 </div>
+              </div>
+
+              <div class="product-quantity">
+                
+
+              <div class="product-actions" style="display: flex; flex-direction: row; gap: 1rem; justify-content: center; align-items: center;">
+                <button class="btn add-to-cart-btn" id="detail-add-to-cart">
+                  <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+                <button class="btn wishlist-btn" style="width: fit-content; " id="detail-add-to-wishlist">
+                  <i class="far fa-heart"></i> Add to Wishlist
+                </button>
               </div>
 
               <div class="product-meta">
@@ -229,6 +241,7 @@
                 </div>
               </div>
             </div>
+          </div>
           </div>
 
           <div class="product-tabs">
@@ -411,12 +424,12 @@
             <h2>Related Products</h2>
             <div class="products-grid" id="related-products-container"></div>
           </section>
-        </div>
+       
       </section>
     </main>
 
     <!-- Footer Section -->
-    <div id="footer-placeholder"></div>
+    <div  id="footer-placeholder"></div>
 
     <script>
       document.getElementById("footer-placeholder").innerHTML = fetch(

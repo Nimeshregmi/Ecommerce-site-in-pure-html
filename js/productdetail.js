@@ -388,7 +388,7 @@ function loadRelatedProducts() {
                         ${product.badge === 'sale' ? `<p class="product-old-price">$${(product.price * 1.2).toFixed(2)}</p>` : ''}
                     </div>
                     <div class="product-actions">
-                        <button class="add-to-cart-btn ${!product.availability ? 'disabled' : ''}" data-id="${product.id}" ${!product.availability ? 'disabled' : ''}>
+                        <button  class="add-to-cart-btn ${!product.availability ? 'disabled' : ''}" data-id="${product.id}" ${!product.availability ? 'disabled' : ''}>
                             <i class="fas fa-shopping-cart"></i>
                             <span>${product.availability ? 'Add to Cart' : 'Out of Stock'}</span>
                         </button>
