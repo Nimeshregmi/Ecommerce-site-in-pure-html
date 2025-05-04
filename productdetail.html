@@ -6,6 +6,7 @@
     <title>ShopEase - Product Detail</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/productdetail.css" />
+    <link rel="stylesheet" href="css/inventory.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -69,7 +70,6 @@
           <div class="product-detail-container">
             <div class="product-gallery">
               <div class="main-image">
-                <!-- <div class="image-placeholder" id="main-product-image"></div> -->
                 <img
                   class="image-placeholder"
                   id="main-product-image"
@@ -89,7 +89,6 @@
                   />
                 </div>
                 <div class="thumbnail">
-                  <!-- <div ></div> -->
                   <img
                     class="image-placeholder"
                     src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740"
@@ -167,34 +166,6 @@
                 </div>
               </div>
 
-              <div class="product-actions">
-                <div class="quantity-selector">
-                  <button class="qty-btn minus" aria-label="Decrease quantity">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <input
-                    type="number"
-                    min="1"
-                    value="1"
-                    id="product-quantity"
-                    class="qty-input"
-                  />
-                  <button class="qty-btn plus" aria-label="Increase quantity">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </div>
-                <button
-                  class="btn btn-primary add-to-cart-btn"
-                  id="detail-add-to-cart"
-                  style="font-size: 0.8rem;"
-                >
-                  <i class="fas fa-shopping-cart"></i> Add to Cart
-                </button>
-                <button class="btn btn-outlined wishlist-btn" style="font-size: 0.8rem;">
-                  <i class="far fa-heart"></i> Add to Wishlist
-                </button>
-              </div>
-
               <div class="product-meta">
                 <p>
                   <strong><i class="fas fa-barcode"></i> SKU:</strong>
@@ -214,21 +185,6 @@
                   <strong><i class="fas fa-truck"></i> Shipping:</strong>
                   <span>Free shipping</span>
                 </p>
-              </div>
-
-              <div class="quick-buy-options">
-                <h3><i class="fas fa-bolt"></i> Quick Buy Options</h3>
-                <div class="payment-options">
-                  <button class="payment-option">
-                    <i class="fab fa-paypal"></i> PayPal
-                  </button>
-                  <button class="payment-option">
-                    <i class="fab fa-apple-pay"></i> Apple Pay
-                  </button>
-                  <button class="payment-option">
-                    <i class="fab fa-google-pay"></i> Google Pay
-                  </button>
-                </div>
               </div>
 
               <div class="product-guarantees">
@@ -447,41 +403,6 @@
                     </p>
                   </div>
                 </div>
-
-                <div class="write-review">
-                  <h3>Write a Review</h3>
-                  <form class="review-form">
-                    <div class="form-group">
-                      <label for="reviewer-name">Your Name</label>
-                      <input type="text" id="reviewer-name" required />
-                    </div>
-                    <div class="form-group">
-                      <label for="reviewer-email">Your Email</label>
-                      <input type="email" id="reviewer-email" required />
-                    </div>
-                    <div class="form-group">
-                      <label>Your Rating</label>
-                      <div class="rating-input">
-                        <i class="far fa-star" data-rating="1"></i>
-                        <i class="far fa-star" data-rating="2"></i>
-                        <i class="far fa-star" data-rating="3"></i>
-                        <i class="far fa-star" data-rating="4"></i>
-                        <i class="far fa-star" data-rating="5"></i>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="review-content">Your Review</label>
-                      <textarea
-                        id="review-content"
-                        rows="5"
-                        required
-                      ></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                      Submit Review
-                    </button>
-                  </form>
-                </div>
               </div>
             </div>
           </div>
@@ -493,24 +414,6 @@
         </div>
       </section>
     </main>
-
-    <!-- Mobile Sticky Add to Cart -->
-    <div class="mobile-sticky-cart">
-      <div class="sticky-product-info">
-        <img
-          id="sticky-product-image"
-          src="https://img.freepik.com/premium-photo/headphones-white_1155277-104.jpg?w=740"
-          alt=""
-        />
-        <div>
-          <h4 id="sticky-product-name">Product Name</h4>
-          <p id="sticky-product-price">$299.99</p>
-        </div>
-      </div>
-      <button class="btn btn-primary sticky-add-to-cart">
-        <i class="fas fa-shopping-cart"></i> Add to Cart
-      </button>
-    </div>
 
     <!-- Footer Section -->
     <div id="footer-placeholder"></div>
@@ -529,43 +432,5 @@
     <script src="js/Product.js"></script>
     <script src="js/productdetail.js"></script>
     <script src="js/Navbar.js"></script>
-
-    <script>
-      // Show sticky cart when scrolling down
-      window.addEventListener("scroll", function () {
-        const stickyCart = document.querySelector(".mobile-sticky-cart");
-        const productActions = document.querySelector(".product-actions");
-
-        if (window.scrollY > 300 && window.innerWidth < 768) {
-          stickyCart.classList.add("visible");
-        } else {
-          stickyCart.classList.remove("visible");
-        }
-      });
-
-      // Sync sticky cart with main product info
-      document.addEventListener("DOMContentLoaded", function () {
-        const productName = document.getElementById(
-          "detail-product-name"
-        ).textContent;
-        const productPrice = document.getElementById(
-          "detail-product-price"
-        ).textContent;
-        const productImage = document.getElementById("main-product-image").src;
-
-        document.getElementById("sticky-product-name").textContent =
-          productName;
-        document.getElementById("sticky-product-price").textContent =
-          productPrice;
-        document.getElementById("sticky-product-image").src = productImage;
-
-        // Make sticky add to cart button work
-        document
-          .querySelector(".sticky-add-to-cart")
-          .addEventListener("click", function () {
-            document.getElementById("detail-add-to-cart").click();
-          });
-      });
-    </script>
   </body>
 </html>
