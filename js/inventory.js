@@ -1,7 +1,6 @@
 // Use the products from Product.js
 // Access the products through the ProductService global object
 const inventoryProducts = window.ProductService.getAllProducts();
-console.log('Products loaded:', inventoryProducts.length);
 
 // DOM Elements
 const productsContainer = document.getElementById('products-container');
@@ -104,7 +103,6 @@ function initInventory() {
     renderProducts(currentProducts, currentPage);
     updatePagination();
     setupEventListeners();
-    updateCart();
     setupRangeSlider();
 }
 
@@ -181,15 +179,8 @@ function renderProducts(products, page) {
         productsContainer.appendChild(productCard);
     });
     
-    // Add quick view functionality to newly rendered products
-    document.querySelectorAll('.quick-view-btn').forEach(btn => {
-        btn.addEventListener('click', handleQuickView);
-    });
-    
-    // Add add-to-cart functionality
-    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-        btn.addEventListener('click', handleAddToCart);
-    });
+   
+   
 }
 
 // Update pagination UI
@@ -391,13 +382,6 @@ function setupEventListeners() {
         closeCart();
     });
     
-    // Modal quantity buttons
-    modalQtyBtns.forEach(btn => {
-        btn.addEventListener('click', handleModalQuantity);
-    });
-    
-    // Modal add to cart button
-    modalAddToCartBtn.addEventListener('click', handleModalAddToCart);
     
     // Mobile filter toggle
     const filterToggleBtn = document.getElementById('filter-toggle');
@@ -615,39 +599,7 @@ function clearFilters() {
 }
 
 // Handle Quick View
-function handleQuickView(e) {
-    const productId = parseInt(e.currentTarget.dataset.id);
-    const product = inventoryProducts.find(p => p.id === productId);
-    
-    if (!product) return;
-    
-    currentProductId = productId;
-    modalQtyInput.value = 1; // Reset quantity
-    
-    modalProductTitle.textContent = product.name;
-    modalProductPrice.textContent = `$${product.price.toFixed(2)}`;
-    modalProductDescription.textContent = product.description;
-    modalProductSku.textContent = product.sku;
-    modalProductCategory.textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
-    
-    // Update modal stars
-    const modalStarsContainer = productModal.querySelector('.stars');
-    modalStarsContainer.innerHTML = generateStarRating(product.rating);
-    productModal.querySelector('.product-rating span').textContent = `(${product.reviews} Reviews)`;
-    
-    if (product.availability) {
-        modalProductAvailability.textContent = 'In Stock';
-        modalProductAvailability.className = 'in-stock';
-        modalAddToCartBtn.disabled = false;
-    } else {
-        modalProductAvailability.textContent = 'Out of Stock';
-        modalProductAvailability.className = 'out-of-stock';
-        modalAddToCartBtn.disabled = true;
-    }
-    
-    productModal.classList.add('active');
-    overlay.classList.add('active');
-}
+
 
 // Handle modal quantity buttons
 function handleModalQuantity(e) {
@@ -664,32 +616,7 @@ function handleModalQuantity(e) {
 }
 
 // Handle adding to cart from modal
-function handleModalAddToCart() {
-    if (!currentProductId) return;
-    
-    const product = inventoryProducts.find(p => p.id === currentProductId);
-    const quantity = parseInt(modalQtyInput.value);
-    
-    if (!product || !product.availability || isNaN(quantity) || quantity < 1) return;
-    
-    const existingItem = cart.find(item => item.id === currentProductId);
-    
-    if (existingItem) {
-        existingItem.quantity += quantity;
-    } else {
-        cart.push({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            quantity: quantity
-        });
-    }
-    
-    updateCart();
-    closeModal();
-    showNotification(`${product.name} added to cart!`);
-    saveToLocalStorage();
-}
+
 
 function closeModal() {
     productModal.classList.remove('active');
@@ -698,168 +625,12 @@ function closeModal() {
 }
 
 // Cart functionality
-function handleAddToCart(e) {
-    const productId = parseInt(e.currentTarget.dataset.id);
-    const product = inventoryProducts.find(p => p.id === productId);
-    
-    if (!product || !product.availability) return;
-    
-    const existingItem = cart.find(item => item.id === productId);
-    
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            quantity: 1
-        });
-    }
-    
-    updateCart();
-    showNotification(`${product.name} added to cart!`);
-    saveToLocalStorage();
-}
 
-function updateCart() {
-    // Update cart count
-    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-    const cartCountElements = document.querySelectorAll('.cart-count');
-    cartCountElements.forEach(element => {
-        element.textContent = totalItems;
-    });
-    
-    // Update cart items
-    cartItems.innerHTML = '';
-    
-    if (cart.length === 0) {
-        cartItems.innerHTML = `
-            <div class="empty-cart-message">
-                <i class="fas fa-shopping-cart"></i>
-                <p>Your cart is empty</p>
-            </div>
-        `;
-        checkoutBtn.disabled = true;
-        return;
-    }
-    
-    checkoutBtn.disabled = false;
-    
-    // Calculate total
-    let total = 0;
-    
-    cart.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
-        
-        cartItem.innerHTML = `
-            <div class="cart-item-image">
-                <div class="image-placeholder"></div>
-            </div>
-            <div class="cart-item-details">
-                <h4>${item.name}</h4>
-                <p class="cart-item-price">$${item.price.toFixed(2)}</p>
-                <div class="cart-item-quantity">
-                    <button class="qty-btn minus" data-id="${item.id}">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <span>${item.quantity}</span>
-                    <button class="qty-btn plus" data-id="${item.id}">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-            </div>
-            <button class="remove-item" data-id="${item.id}">
-                <i class="fas fa-trash"></i>
-            </button>
-        `;
-        
-        cartItems.appendChild(cartItem);
-    });
-    
-    totalAmount.textContent = `$${total.toFixed(2)}`;
-    
-    // Add event listeners to quantity buttons and remove button
-    document.querySelectorAll('.cart-item .qty-btn.minus').forEach(btn => {
-        btn.addEventListener('click', decreaseQuantity);
-    });
-    
-    document.querySelectorAll('.cart-item .qty-btn.plus').forEach(btn => {
-        btn.addEventListener('click', increaseQuantity);
-    });
-    
-    document.querySelectorAll('.remove-item').forEach(btn => {
-        btn.addEventListener('click', removeCartItem);
-    });
-}
 
-function decreaseQuantity(e) {
-    const productId = parseInt(e.currentTarget.dataset.id);
-    const cartItem = cart.find(item => item.id === productId);
-    
-    if (cartItem) {
-        cartItem.quantity--;
-        
-        if (cartItem.quantity === 0) {
-            cart = cart.filter(item => item.id !== productId);
-        }
-        
-        updateCart();
-        saveToLocalStorage();
-    }
-}
 
-function increaseQuantity(e) {
-    const productId = parseInt(e.currentTarget.dataset.id);
-    const cartItem = cart.find(item => item.id === productId);
-    
-    if (cartItem) {
-        cartItem.quantity++;
-        updateCart();
-        saveToLocalStorage();
-    }
-}
 
-function removeCartItem(e) {
-    const productId = parseInt(e.currentTarget.dataset.id);
-    const product = inventoryProducts.find(p => p.id === productId);
-    
-    cart = cart.filter(item => item.id !== productId);
-    updateCart();
-    
-    if (product) {
-        showNotification(`${product.name} removed from cart.`);
-    }
-    
-    saveToLocalStorage();
-}
 
-function openCart() {
-    cartSidebar.classList.add('active');
-    overlay.classList.add('active');
-}
 
-function closeCart() {
-    cartSidebar.classList.remove('active');
-    if (!productModal.classList.contains('active')) {
-        overlay.classList.remove('active');
-    }
-}
-
-function handleCheckout() {
-    if (cart.length === 0) return;
-    
-    // Just for demo, we'll clear the cart and show a notification
-    showNotification('Order placed successfully!', 'success');
-    cart = [];
-    updateCart();
-    closeCart();
-    saveToLocalStorage();
-}
 
 // Show notification
 function showNotification(message, type = 'info') {
@@ -886,105 +657,7 @@ function showNotification(message, type = 'info') {
 }
 
 // Save state to localStorage
-function saveToLocalStorage() {
-    const state = {
-        cart: cart,
-        currentView: currentView,
-        currentFilters: currentFilters,
-        currentSort: sortSelect.value
-    };
-    
-    localStorage.setItem('shopEaseState', JSON.stringify(state));
-}
 
-// Load state from localStorage
-function loadFromLocalStorage() {
-    // Load app state
-    const savedState = localStorage.getItem('shopEaseState');
-    
-    if (savedState) {
-        const state = JSON.parse(savedState);
-        
-        // Restore cart
-        cart = state.cart || [];
-        
-        // Restore view
-        currentView = state.currentView || 'grid';
-        if (currentView === 'list') {
-            productsContainer.classList.add('list-view');
-            viewButtons.forEach(btn => {
-                if (btn.dataset.view === 'list') {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-        
-        // Restore filters
-        if (state.currentFilters) {
-            currentFilters = state.currentFilters;
-            
-            // Apply saved filters to UI
-            if (currentFilters.categories.length > 0) {
-                categoryCheckboxes.forEach(checkbox => {
-                    checkbox.checked = currentFilters.categories.includes(checkbox.value);
-                });
-            }
-            
-            if (currentFilters.rating > 0) {
-                ratingRadios.forEach(radio => {
-                    switch (currentFilters.rating) {
-                        case 4:
-                            radio.checked = radio.value === '4up';
-                            break;
-                        case 3:
-                            radio.checked = radio.value === '3up';
-                            break;
-                        case 2:
-                            radio.checked = radio.value === '2up';
-                            break;
-                        case 1:
-                            radio.checked = radio.value === '1up';
-                            break;
-                    }
-                });
-            }
-            
-            minPriceInput.value = currentFilters.minPrice;
-            maxPriceInput.value = currentFilters.maxPrice;
-            minRangeInput.value = currentFilters.minPrice;
-            maxRangeInput.value = currentFilters.maxPrice;
-        }
-        
-        // Apply filters
-        let filteredProducts = [...inventoryProducts];
-        
-        // Filter by category
-        if (currentFilters.categories.length > 0) {
-            filteredProducts = filteredProducts.filter(product => 
-                currentFilters.categories.includes(product.category)
-            );
-        }
-        
-        // Filter by price
-        filteredProducts = filteredProducts.filter(product => 
-            product.price >= currentFilters.minPrice && product.price <= currentFilters.maxPrice
-        );
-        
-        // Filter by rating
-        if (currentFilters.rating > 0) {
-            filteredProducts = filteredProducts.filter(product => product.rating >= currentFilters.rating);
-        }
-        
-        currentProducts = filteredProducts;
-        
-        // Restore sort
-        if (state.currentSort) {
-            sortSelect.value = state.currentSort;
-        }
-    }
-}
 
 // Add CSS for notifications and other dynamic elements
 function addDynamicStyles() {
@@ -1203,9 +876,6 @@ function handleSearch(event) {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing inventory page');
-    console.log('Products available:', inventoryProducts.length);
-    console.log('Products container:', productsContainer);
     
     // Check for search parameter in URL
     const urlParams = new URLSearchParams(window.location.search);

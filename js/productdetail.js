@@ -46,8 +46,7 @@ function init() {
         setupEventListeners();
         loadRelatedProducts();
         
-        // Add this product to recently viewed
-        addToRecentlyViewed(currentProduct.id);
+        
     } else {
         // Handle product not found
         productTitle.textContent = 'Product Not Found';
@@ -56,22 +55,7 @@ function init() {
 }
 
 // Add product to recently viewed
-function addToRecentlyViewed(productId) {
-    // Get recently viewed from localStorage
-    let recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
-    
-    // Remove the product if it's already in the list
-    recentlyViewed = recentlyViewed.filter(id => id !== productId);
-    
-    // Add the product to the beginning of the list
-    recentlyViewed.unshift(productId);
-    
-    // Keep only the last 5 products
-    recentlyViewed = recentlyViewed.slice(0, 5);
-    
-    // Save to localStorage
-    localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
-}
+
 
 // Render product details on the page
 function renderProductDetails() {
