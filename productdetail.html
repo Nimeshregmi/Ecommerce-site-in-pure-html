@@ -52,7 +52,7 @@
       </div>
     </header>
 
-    <main>
+    <main class="container">
       <section class="page-header">
         <div class="container">
           <h1 id="product-title">Product Details</h1>
@@ -66,7 +66,7 @@
         </div>
       </section>
 
-      <section class="product-detail-section">
+      <section class="product-detail-section container">
         <div class="container">
           <div class="product-detail-container">
             <div class="product-gallery">
@@ -108,17 +108,19 @@
 
             <div class="product-info">
               <h1 id="detail-product-name">Product Name</h1>
-              <div style="display: flex; align-items: center; justify-content: start; margin-bottom: 20px ; gap: 20px;"><div class="product-ratings">
-                <div class="stars" id="detail-product-stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star-half-alt"></i>
+              <div class="ratings-price-container">
+                <div class="product-ratings">
+                  <div class="stars" id="detail-product-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <span id="detail-product-reviews">(125 Reviews)</span>
                 </div>
-                <span id="detail-product-reviews">(125 Reviews)</span>
+                <p class="product-price" id="detail-product-price">$299.99</p>
               </div>
-              <p class="product-price" id="detail-product-price">$299.99</p></div>
 
               <div class="product-description">
                 <h3>Description</h3>
@@ -167,14 +169,11 @@
                 </div>
               </div>
 
-              <div class="product-quantity">
-                
-
-              <div class="product-actions" style="display: flex; flex-direction: row; gap: 1rem; justify-content: center; align-items: center;">
+              <div class="product-actions" >
                 <button class="btn add-to-cart-btn" id="detail-add-to-cart">
                   <i class="fas fa-shopping-cart"></i> Add to Cart
                 </button>
-                <button class="btn wishlist-btn" style="width: fit-content; " id="detail-add-to-wishlist">
+                <button class="btn wishlist-btn" id="detail-add-to-wishlist">
                   <i class="far fa-heart"></i> Add to Wishlist
                 </button>
               </div>
@@ -243,7 +242,7 @@
               </div>
             </div>
           </div>
-          </div>
+        </div>
 
           <div class="product-tabs">
             <div class="tabs-header">
