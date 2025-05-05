@@ -1,154 +1,6 @@
-// Product data - would typically come from an API/backend
-const products = [
-    {
-        id: 1,
-        name: "Wireless Headphones",
-        price: 199.99,
-        rating: 4.5,
-        reviews: 124,
-        category: "electronics",
-        image: "assets/placeholder.jpg",
-        description: "Premium wireless headphones with noise cancellation and high-fidelity sound. Perfect for music lovers and professionals.",
-        badge: "bestseller",
-        sku: "EL12345",
-        availability: true
-    },
-    {
-        id: 2,
-        name: "Smart Watch",
-        price: 249.99,
-        rating: 4.2,
-        reviews: 89,
-        category: "electronics",
-        image: "assets/placeholder.jpg",
-        description: "Feature-rich smartwatch with heart rate monitoring, GPS tracking, and a beautiful AMOLED display.",
-        badge: "new",
-        sku: "EL67890",
-        availability: true
-    },
-    {
-        id: 3,
-        name: "Casual T-shirt",
-        price: 29.99,
-        rating: 4.0,
-        reviews: 210,
-        category: "clothing",
-        image: "assets/placeholder.jpg",
-        description: "Comfortable cotton t-shirt for everyday wear. Available in multiple colors and sizes.",
-        sku: "CL12345",
-        availability: true
-    },
-    {
-        id: 4,
-        name: "Coffee Maker",
-        price: 89.99,
-        rating: 4.7,
-        reviews: 156,
-        category: "home",
-        image: "assets/placeholder.jpg",
-        description: "Programmable coffee maker with timer and multiple brew settings. Makes up to 12 cups.",
-        sku: "HK45678",
-        availability: true
-    },
-    {
-        id: 5,
-        name: "Leather Wallet",
-        price: 49.99,
-        rating: 4.3,
-        reviews: 78,
-        category: "accessories",
-        image: "assets/placeholder.jpg",
-        description: "Genuine leather wallet with multiple card slots and coin pocket. Slim design for comfort.",
-        sku: "AC12345",
-        availability: false
-    },
-    {
-        id: 6,
-        name: "Wireless Earbuds",
-        price: 149.99,
-        rating: 4.4,
-        reviews: 112,
-        category: "electronics",
-        image: "assets/placeholder.jpg",
-        description: "True wireless earbuds with touch controls, water resistance, and long battery life.",
-        badge: "sale",
-        sku: "EL54321",
-        availability: true
-    },
-    {
-        id: 7,
-        name: "Kitchen Blender",
-        price: 79.99,
-        rating: 4.1,
-        reviews: 93,
-        category: "home",
-        image: "assets/placeholder.jpg",
-        description: "Powerful blender with multiple speed settings and pulse function. Perfect for smoothies and soups.",
-        sku: "HK78901",
-        availability: true
-    },
-    {
-        id: 8,
-        name: "Denim Jacket",
-        price: 69.99,
-        rating: 4.6,
-        reviews: 45,
-        category: "clothing",
-        image: "assets/placeholder.jpg",
-        description: "Classic denim jacket with a modern fit. Versatile and durable for everyday wear.",
-        sku: "CL67890",
-        availability: true
-    },
-    {
-        id: 9,
-        name: "Bluetooth Speaker",
-        price: 129.99,
-        rating: 4.8,
-        reviews: 187,
-        category: "electronics",
-        image: "assets/placeholder.jpg",
-        description: "Portable Bluetooth speaker with 360° sound and waterproof design. Perfect for outdoor activities.",
-        badge: "bestseller",
-        sku: "EL24680",
-        availability: true
-    },
-    {
-        id: 10,
-        name: "Yoga Mat",
-        price: 35.99,
-        rating: 4.3,
-        reviews: 64,
-        category: "accessories",
-        image: "assets/placeholder.jpg",
-        description: "High-density yoga mat with non-slip surface and carrying strap. Eco-friendly material.",
-        sku: "AC13579",
-        availability: true
-    },
-    {
-        id: 11,
-        name: "Digital Camera",
-        price: 499.99,
-        rating: 4.7,
-        reviews: 102,
-        category: "electronics",
-        image: "assets/placeholder.jpg",
-        description: "20MP digital camera with 4K video recording, optical zoom, and built-in stabilization.",
-        sku: "EL97531",
-        availability: true
-    },
-    {
-        id: 12,
-        name: "Desk Lamp",
-        price: 45.99,
-        rating: 3.9,
-        reviews: 58,
-        category: "home",
-        image: "assets/placeholder.jpg",
-        description: "Adjustable desk lamp with multiple brightness levels and color temperatures. USB charging port included.",
-        sku: "HK24680",
-        availability: true
-    }
-];
+// Use the products from Product.js
+// Access the products through the ProductService global object
+const inventoryProducts = window.ProductService.getAllProducts();
 
 // DOM Elements
 const productsContainer = document.getElementById('products-container');
@@ -182,8 +34,57 @@ const modalQtyBtns = document.querySelectorAll('.quantity-selector .qty-btn');
 const modalAddToCartBtn = document.querySelector('.modal-body .add-to-cart-btn');
 const checkoutBtn = document.querySelector('.checkout-btn');
 
+// Export search function for navbar to use
+window.performSearch = function(searchTerm) {
+    if (searchTerm) {
+        // Filter products based on search term
+        currentProducts = inventoryProducts.filter(product => 
+            product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            product.category.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        
+        // Reset filters and pagination
+        currentFilters = {
+            categories: [],
+            minPrice: 0,
+            maxPrice: 1000,
+            rating: 0
+        };
+        currentPage = 1;
+        
+        // Update UI
+        renderProducts(currentProducts, currentPage);
+        updatePagination();
+        
+        // Update filter UI
+        categoryCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        ratingRadios.forEach(radio => {
+            radio.checked = false;
+        });
+        minPriceInput.value = 0;
+        maxPriceInput.value = 1000;
+        minRangeInput.value = 0;
+        maxRangeInput.value = 1000;
+        setupRangeSlider();
+        
+        // Update the search input field with the search term
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.value = searchTerm;
+        }
+    } else {
+        // If search is empty, show all products
+        currentProducts = [...inventoryProducts];
+        renderProducts(currentProducts, currentPage);
+        updatePagination();
+    }
+};
+
 // Current state
-let currentProducts = [...products];
+let currentProducts = [...inventoryProducts];
 let currentView = 'grid';
 let currentFilters = {
     categories: [],
@@ -197,14 +98,16 @@ let currentPage = 1;
 let itemsPerPage = 8;
 
 // Initialize the page
-function init() {
+function initInventory() {
     loadFromLocalStorage();
     renderProducts(currentProducts, currentPage);
     updatePagination();
     setupEventListeners();
-    updateCart();
     setupRangeSlider();
 }
+
+// Make init function available globally
+window.initInventory = initInventory;
 
 // Render products based on current filters, sort and pagination
 function renderProducts(products, page) {
@@ -235,10 +138,10 @@ function renderProducts(products, page) {
         
         productCard.innerHTML = `
            <div class="product-card-inner">
-               <a href="productdetail.html" class="product-link" data-id="${product.id}">
+               <a href="productdetail.html?id=${product.id}" class="product-link" data-id="${product.id}">
                 <div class="product-image-container">
                     ${badgeHtml}
-                    <img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="${product.name}" class="product-img">
+                    <img src="${product.image}" alt="${product.name}" class="product-img">
                     <div class="product-overlay">
                         <button class="quick-view-btn" data-id="${product.id}">
                             <i class="fas fa-eye"></i> Quick View
@@ -276,15 +179,8 @@ function renderProducts(products, page) {
         productsContainer.appendChild(productCard);
     });
     
-    // Add quick view functionality to newly rendered products
-    document.querySelectorAll('.quick-view-btn').forEach(btn => {
-        btn.addEventListener('click', handleQuickView);
-    });
-    
-    // Add add-to-cart functionality
-    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-        btn.addEventListener('click', handleAddToCart);
-    });
+   
+   
 }
 
 // Update pagination UI
@@ -388,26 +284,66 @@ function setupRangeSlider() {
     });
 }
 
-// Generate star rating HTML
+// Handle price input changes (from number inputs)
+function handlePriceInputChange() {
+    let minValue = parseFloat(minPriceInput.value);
+    let maxValue = parseFloat(maxPriceInput.value);
+    
+    // Validate values
+    if (isNaN(minValue)) minValue = 0;
+    if (isNaN(maxValue)) maxValue = 1000;
+    
+    // Ensure min doesn't exceed max
+    if (minValue > maxValue) {
+        minValue = maxValue;
+        minPriceInput.value = minValue;
+    }
+    
+    // Update range inputs
+    minRangeInput.value = minValue;
+    maxRangeInput.value = maxValue;
+    
+    currentFilters.minPrice = minValue;
+    currentFilters.maxPrice = maxValue;
+    
+    setupRangeSlider(); // Update the visual slider
+    
+    // Apply filters immediately
+    applyFilters();
+}
+
+// Handle range slider changes
+function handleRangeInputChange() {
+    let minValue = parseFloat(minRangeInput.value);
+    let maxValue = parseFloat(maxRangeInput.value);
+    
+    // Ensure min doesn't exceed max
+    if (minValue > maxValue) {
+        if (this === minRangeInput) {
+            minValue = maxValue;
+            minRangeInput.value = minValue;
+        } else {
+            maxValue = minValue;
+            maxRangeInput.value = maxValue;
+        }
+    }
+    
+    // Update text inputs
+    minPriceInput.value = minValue;
+    maxPriceInput.value = maxValue;
+    
+    currentFilters.minPrice = minValue;
+    currentFilters.maxPrice = maxValue;
+    
+    setupRangeSlider(); // Update the visual slider
+    
+    // Apply filters immediately
+    applyFilters();
+}
+
+// Use the generateStarRating function from ProductService
 function generateStarRating(rating) {
-    let stars = '';
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
-    
-    for (let i = 0; i < fullStars; i++) {
-        stars += '<i class="fas fa-star"></i>';
-    }
-    
-    if (hasHalfStar) {
-        stars += '<i class="fas fa-star-half-alt"></i>';
-    }
-    
-    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-    for (let i = 0; i < emptyStars; i++) {
-        stars += '<i class="far fa-star"></i>';
-    }
-    
-    return stars;
+    return window.ProductService.generateStarRating(rating);
 }
 
 // Setup all event listeners
@@ -436,8 +372,7 @@ function setupEventListeners() {
     minRangeInput.addEventListener('input', handleRangeInputChange);
     maxRangeInput.addEventListener('input', handleRangeInputChange);
     
-    // Apply/Clear filters
-    applyFiltersBtn.addEventListener('click', applyFilters);
+    // Clear filters
     clearFiltersBtn.addEventListener('click', clearFilters);
     
     // Modal and overlay
@@ -447,13 +382,6 @@ function setupEventListeners() {
         closeCart();
     });
     
-    // Modal quantity buttons
-    modalQtyBtns.forEach(btn => {
-        btn.addEventListener('click', handleModalQuantity);
-    });
-    
-    // Modal add to cart button
-    modalAddToCartBtn.addEventListener('click', handleModalAddToCart);
     
     // Mobile filter toggle
     const filterToggleBtn = document.getElementById('filter-toggle');
@@ -495,16 +423,22 @@ function setupEventListeners() {
     });
     
     // Cart
-    closeCartBtn.addEventListener('click', closeCart);
-    document.querySelector('.cart-icon').addEventListener('click', function(e) {
-        e.preventDefault();
-        openCart();
-    });
+    if (closeCartBtn) {
+        closeCartBtn.addEventListener('click', closeCart);
+    }
+    
+    const cartIcon = document.querySelector('.cart-icon');
+    if (cartIcon) {
+        cartIcon.addEventListener('click', function(e) {
+            e.preventDefault();
+            openCart();
+        });
+    }
     
     // Checkout button
-    checkoutBtn.addEventListener('click', handleCheckout);
-    
-    // Checkout button event listener already set above
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', handleCheckout);
+    }
 }
 
 // Sort products
@@ -566,6 +500,8 @@ function handleCategoryFilter() {
         .map(checkbox => checkbox.value);
     
     currentFilters.categories = selectedCategories;
+    // Apply filters immediately without requiring the Apply button
+    applyFilters();
 }
 
 // Handle rating filter changes
@@ -588,62 +524,13 @@ function handleRatingFilter(e) {
         default:
             currentFilters.rating = 0;
     }
-}
-
-// Handle price input changes (from number inputs)
-function handlePriceInputChange() {
-    let minValue = parseFloat(minPriceInput.value);
-    let maxValue = parseFloat(maxPriceInput.value);
-    
-    // Validate values
-    if (isNaN(minValue)) minValue = 0;
-    if (isNaN(maxValue)) maxValue = 1000;
-    
-    // Ensure min doesn't exceed max
-    if (minValue > maxValue) {
-        minValue = maxValue;
-        minPriceInput.value = minValue;
-    }
-    
-    // Update range inputs
-    minRangeInput.value = minValue;
-    maxRangeInput.value = maxValue;
-    
-    currentFilters.minPrice = minValue;
-    currentFilters.maxPrice = maxValue;
-    
-    setupRangeSlider(); // Update the visual slider
-}
-
-// Handle range slider changes
-function handleRangeInputChange() {
-    let minValue = parseFloat(minRangeInput.value);
-    let maxValue = parseFloat(maxRangeInput.value);
-    
-    // Ensure min doesn't exceed max
-    if (minValue > maxValue) {
-        if (this === minRangeInput) {
-            minValue = maxValue;
-            minRangeInput.value = minValue;
-        } else {
-            maxValue = minValue;
-            maxRangeInput.value = maxValue;
-        }
-    }
-    
-    // Update text inputs
-    minPriceInput.value = minValue;
-    maxPriceInput.value = maxValue;
-    
-    currentFilters.minPrice = minValue;
-    currentFilters.maxPrice = maxValue;
-    
-    setupRangeSlider(); // Update the visual slider
+    // Apply filters immediately
+    applyFilters();
 }
 
 // Apply all current filters
 function applyFilters() {
-    let filteredProducts = [...products];
+    let filteredProducts = [...inventoryProducts];
     
     // Filter by category
     if (currentFilters.categories.length > 0) {
@@ -699,7 +586,7 @@ function clearFilters() {
     };
     
     // Reset products and sort
-    currentProducts = [...products];
+    currentProducts = [...inventoryProducts];
     currentPage = 1;
     sortSelect.value = 'featured';
     handleSort();
@@ -712,39 +599,7 @@ function clearFilters() {
 }
 
 // Handle Quick View
-function handleQuickView(e) {
-    const productId = parseInt(e.currentTarget.dataset.id);
-    const product = products.find(p => p.id === productId);
-    
-    if (!product) return;
-    
-    currentProductId = productId;
-    modalQtyInput.value = 1; // Reset quantity
-    
-    modalProductTitle.textContent = product.name;
-    modalProductPrice.textContent = `$${product.price.toFixed(2)}`;
-    modalProductDescription.textContent = product.description;
-    modalProductSku.textContent = product.sku;
-    modalProductCategory.textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
-    
-    // Update modal stars
-    const modalStarsContainer = productModal.querySelector('.stars');
-    modalStarsContainer.innerHTML = generateStarRating(product.rating);
-    productModal.querySelector('.product-rating span').textContent = `(${product.reviews} Reviews)`;
-    
-    if (product.availability) {
-        modalProductAvailability.textContent = 'In Stock';
-        modalProductAvailability.className = 'in-stock';
-        modalAddToCartBtn.disabled = false;
-    } else {
-        modalProductAvailability.textContent = 'Out of Stock';
-        modalProductAvailability.className = 'out-of-stock';
-        modalAddToCartBtn.disabled = true;
-    }
-    
-    productModal.classList.add('active');
-    overlay.classList.add('active');
-}
+
 
 // Handle modal quantity buttons
 function handleModalQuantity(e) {
@@ -761,32 +616,7 @@ function handleModalQuantity(e) {
 }
 
 // Handle adding to cart from modal
-function handleModalAddToCart() {
-    if (!currentProductId) return;
-    
-    const product = products.find(p => p.id === currentProductId);
-    const quantity = parseInt(modalQtyInput.value);
-    
-    if (!product || !product.availability || isNaN(quantity) || quantity < 1) return;
-    
-    const existingItem = cart.find(item => item.id === currentProductId);
-    
-    if (existingItem) {
-        existingItem.quantity += quantity;
-    } else {
-        cart.push({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            quantity: quantity
-        });
-    }
-    
-    updateCart();
-    closeModal();
-    showNotification(`${product.name} added to cart!`);
-    saveToLocalStorage();
-}
+
 
 function closeModal() {
     productModal.classList.remove('active');
@@ -795,168 +625,12 @@ function closeModal() {
 }
 
 // Cart functionality
-function handleAddToCart(e) {
-    const productId = parseInt(e.currentTarget.dataset.id);
-    const product = products.find(p => p.id === productId);
-    
-    if (!product || !product.availability) return;
-    
-    const existingItem = cart.find(item => item.id === productId);
-    
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            quantity: 1
-        });
-    }
-    
-    updateCart();
-    showNotification(`${product.name} added to cart!`);
-    saveToLocalStorage();
-}
 
-function updateCart() {
-    // Update cart count
-    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-    const cartCountElements = document.querySelectorAll('.cart-count');
-    cartCountElements.forEach(element => {
-        element.textContent = totalItems;
-    });
-    
-    // Update cart items
-    cartItems.innerHTML = '';
-    
-    if (cart.length === 0) {
-        cartItems.innerHTML = `
-            <div class="empty-cart-message">
-                <i class="fas fa-shopping-cart"></i>
-                <p>Your cart is empty</p>
-            </div>
-        `;
-        checkoutBtn.disabled = true;
-        return;
-    }
-    
-    checkoutBtn.disabled = false;
-    
-    // Calculate total
-    let total = 0;
-    
-    cart.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
-        
-        cartItem.innerHTML = `
-            <div class="cart-item-image">
-                <div class="image-placeholder"></div>
-            </div>
-            <div class="cart-item-details">
-                <h4>${item.name}</h4>
-                <p class="cart-item-price">$${item.price.toFixed(2)}</p>
-                <div class="cart-item-quantity">
-                    <button class="qty-btn minus" data-id="${item.id}">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <span>${item.quantity}</span>
-                    <button class="qty-btn plus" data-id="${item.id}">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-            </div>
-            <button class="remove-item" data-id="${item.id}">
-                <i class="fas fa-trash"></i>
-            </button>
-        `;
-        
-        cartItems.appendChild(cartItem);
-    });
-    
-    totalAmount.textContent = `$${total.toFixed(2)}`;
-    
-    // Add event listeners to quantity buttons and remove button
-    document.querySelectorAll('.cart-item .qty-btn.minus').forEach(btn => {
-        btn.addEventListener('click', decreaseQuantity);
-    });
-    
-    document.querySelectorAll('.cart-item .qty-btn.plus').forEach(btn => {
-        btn.addEventListener('click', increaseQuantity);
-    });
-    
-    document.querySelectorAll('.remove-item').forEach(btn => {
-        btn.addEventListener('click', removeCartItem);
-    });
-}
 
-function decreaseQuantity(e) {
-    const productId = parseInt(e.currentTarget.dataset.id);
-    const cartItem = cart.find(item => item.id === productId);
-    
-    if (cartItem) {
-        cartItem.quantity--;
-        
-        if (cartItem.quantity === 0) {
-            cart = cart.filter(item => item.id !== productId);
-        }
-        
-        updateCart();
-        saveToLocalStorage();
-    }
-}
 
-function increaseQuantity(e) {
-    const productId = parseInt(e.currentTarget.dataset.id);
-    const cartItem = cart.find(item => item.id === productId);
-    
-    if (cartItem) {
-        cartItem.quantity++;
-        updateCart();
-        saveToLocalStorage();
-    }
-}
 
-function removeCartItem(e) {
-    const productId = parseInt(e.currentTarget.dataset.id);
-    const product = products.find(p => p.id === productId);
-    
-    cart = cart.filter(item => item.id !== productId);
-    updateCart();
-    
-    if (product) {
-        showNotification(`${product.name} removed from cart.`);
-    }
-    
-    saveToLocalStorage();
-}
 
-function openCart() {
-    cartSidebar.classList.add('active');
-    overlay.classList.add('active');
-}
 
-function closeCart() {
-    cartSidebar.classList.remove('active');
-    if (!productModal.classList.contains('active')) {
-        overlay.classList.remove('active');
-    }
-}
-
-function handleCheckout() {
-    if (cart.length === 0) return;
-    
-    // Just for demo, we'll clear the cart and show a notification
-    showNotification('Order placed successfully!', 'success');
-    cart = [];
-    updateCart();
-    closeCart();
-    saveToLocalStorage();
-}
 
 // Show notification
 function showNotification(message, type = 'info') {
@@ -982,110 +656,8 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// Theme toggle functionality has been removed
-
 // Save state to localStorage
-function saveToLocalStorage() {
-    const state = {
-        cart: cart,
-        currentView: currentView,
-        currentFilters: currentFilters,
-        currentSort: sortSelect.value
-    };
-    
-    localStorage.setItem('shopEaseState', JSON.stringify(state));
-}
 
-// Load state from localStorage
-function loadFromLocalStorage() {
-    // Theme-related code has been removed
-    
-    // Load app state
-    const savedState = localStorage.getItem('shopEaseState');
-    
-    if (savedState) {
-        const state = JSON.parse(savedState);
-        
-        // Restore cart
-        cart = state.cart || [];
-        
-        // Restore view
-        currentView = state.currentView || 'grid';
-        if (currentView === 'list') {
-            productsContainer.classList.add('list-view');
-            viewButtons.forEach(btn => {
-                if (btn.dataset.view === 'list') {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-        
-        // Restore filters
-        if (state.currentFilters) {
-            currentFilters = state.currentFilters;
-            
-            // Apply saved filters to UI
-            if (currentFilters.categories.length > 0) {
-                categoryCheckboxes.forEach(checkbox => {
-                    checkbox.checked = currentFilters.categories.includes(checkbox.value);
-                });
-            }
-            
-            if (currentFilters.rating > 0) {
-                ratingRadios.forEach(radio => {
-                    switch (currentFilters.rating) {
-                        case 4:
-                            radio.checked = radio.value === '4up';
-                            break;
-                        case 3:
-                            radio.checked = radio.value === '3up';
-                            break;
-                        case 2:
-                            radio.checked = radio.value === '2up';
-                            break;
-                        case 1:
-                            radio.checked = radio.value === '1up';
-                            break;
-                    }
-                });
-            }
-            
-            minPriceInput.value = currentFilters.minPrice;
-            maxPriceInput.value = currentFilters.maxPrice;
-            minRangeInput.value = currentFilters.minPrice;
-            maxRangeInput.value = currentFilters.maxPrice;
-        }
-        
-        // Apply filters
-        let filteredProducts = [...products];
-        
-        // Filter by category
-        if (currentFilters.categories.length > 0) {
-            filteredProducts = filteredProducts.filter(product => 
-                currentFilters.categories.includes(product.category)
-            );
-        }
-        
-        // Filter by price
-        filteredProducts = filteredProducts.filter(product => 
-            product.price >= currentFilters.minPrice && product.price <= currentFilters.maxPrice
-        );
-        
-        // Filter by rating
-        if (currentFilters.rating > 0) {
-            filteredProducts = filteredProducts.filter(product => product.rating >= currentFilters.rating);
-        }
-        
-        currentProducts = filteredProducts;
-        
-        // Restore sort
-        if (state.currentSort) {
-            sortSelect.value = state.currentSort;
-        }
-    }
-}
 
 // Add CSS for notifications and other dynamic elements
 function addDynamicStyles() {
@@ -1255,8 +827,75 @@ function addDynamicStyles() {
     document.head.appendChild(style);
 }
 
+// Handle search functionality
+function handleSearch(event) {
+    event.preventDefault();
+    const searchInput = document.getElementById('search-input');
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    
+    if (searchTerm) {
+        // Filter products based on search term
+        currentProducts = inventoryProducts.filter(product => 
+            product.name.toLowerCase().includes(searchTerm) ||
+            product.description.toLowerCase().includes(searchTerm) ||
+            product.category.toLowerCase().includes(searchTerm)
+        );
+        
+        // Reset filters and pagination
+        currentFilters = {
+            categories: [],
+            minPrice: 0,
+            maxPrice: 1000,
+            rating: 0
+        };
+        currentPage = 1;
+        
+        // Update UI
+        renderProducts(currentProducts, currentPage);
+        updatePagination();
+        
+        // Update filter UI
+        categoryCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        ratingRadios.forEach(radio => {
+            radio.checked = false;
+        });
+        minPriceInput.value = 0;
+        maxPriceInput.value = 1000;
+        minRangeInput.value = 0;
+        maxRangeInput.value = 1000;
+        setupRangeSlider();
+    } else {
+        // If search is empty, show all products
+        currentProducts = [...inventoryProducts];
+        renderProducts(currentProducts, currentPage);
+        updatePagination();
+    }
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // Check for search parameter in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get('search');
+    
     addDynamicStyles();
-    init();
+    initInventory();
+    
+    // Set up search form
+    const searchForm = document.getElementById('search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', handleSearch);
+    }
+    
+    // If search parameter exists, populate search input and trigger search
+    if (searchParam) {
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.value = searchParam;
+            handleSearch(new Event('submit'));
+        }
+    }
 });

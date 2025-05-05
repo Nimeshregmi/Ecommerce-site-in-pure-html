@@ -40,9 +40,6 @@ function initTheme() {
     }
 }
 
-/**
- * Load theme and other settings from localStorage
- */
 function loadFromLocalStorage() {
     // Load theme
     const savedTheme = localStorage.getItem('theme');
@@ -69,50 +66,7 @@ function loadFromLocalStorage() {
     }
 }
 
-// CSS variables for themes (should be included in your CSS file)
-/* 
-:root {
-    --primary-color: #4a6de5;
-    --secondary-color: #f8f9fa;
-    --text-color: #212529;
-    --background-color: #ffffff;
-    --card-background: #ffffff;
-    --border-color: #dee2e6;
-    --input-background: #f8f9fa;
-    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    --success-color: #4CAF50;
-    --warning-color: #FF9800;
-    --error-color: #F44336;
-    --accent-color: #ff4081;
-    
-    --border-radius-sm: 4px;
-    --border-radius-md: 8px;
-    --border-radius-lg: 12px;
-    
-    --transition-speed: 0.3s;
-}
 
-body.dark-theme {
-    --primary-color: #5d7bf7;
-    --secondary-color: #292b2c;
-    --text-color: #f8f9fa;
-    --background-color: #121212;
-    --card-background: #1e1e1e;
-    --border-color: #343a40;
-    --input-background: #2a2a2a;
-    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-*/
-
-// Event listener for theme toggle button (already included in setupEventListeners)
-// const themeToggle = document.getElementById('theme-toggle');
-// if (themeToggle) {
-//     themeToggle.addEventListener('click', toggleTheme);
-// }
-
-/**
- * Initialize the navbar functionality
- */
 function initNavbar() {
     // Theme toggle
     const themeToggle = document.getElementById('theme-toggle');
@@ -124,29 +78,169 @@ function initNavbar() {
         themeToggle.querySelector('i').className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
     }
     
-    // Mobile menu toggle
+    // Mobile menu toggle with improved animation and accessibility
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const header = document.querySelector('header');
+    
     if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', () => {
-            document.querySelector('.nav-links').classList.toggle('active');
-            // Toggle overlay if it exists
-            const overlay = document.querySelector('.overlay');
-            if (overlay) {
-                overlay.classList.toggle('active');
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            // Toggle active classes
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('active');
+            
+            // Update ARIA attributes for accessibility
+            const isExpanded = navLinks.classList.contains('active');
+            mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
+            
+            // Update menu icon to indicate state with smooth transition
+            const menuIcon = mobileMenuBtn.querySelector('i');
+            if (menuIcon) {
+                if (isExpanded) {
+                    // Animate icon change
+                    menuIcon.style.transform = 'scale(0)';
+                    setTimeout(() => {
+                        menuIcon.classList.remove('fa-bars');
+                        menuIcon.classList.add('fa-times');
+                        menuIcon.style.transform = 'scale(1)';
+                    }, 150);
+                    
+                    // Add overlay effect to header
+                    header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.2)';
+                } else {
+                    // Animate icon change
+                    menuIcon.style.transform = 'scale(0)';
+                    setTimeout(() => {
+                        menuIcon.classList.remove('fa-times');
+                        menuIcon.classList.add('fa-bars');
+                        menuIcon.style.transform = 'scale(1)';
+                    }, 150);
+                    
+                    // Reset header shadow
+                    setTimeout(() => {
+                        header.style.boxShadow = '';
+                    }, 300);
+                }
             }
         });
+        
+        // Close dropdown when clicking outside with improved animation
+        document.addEventListener('click', (e) => {
+            const isClickInside = navLinks.contains(e.target) || mobileMenuBtn.contains(e.target);
+            
+            if (!isClickInside && navLinks.classList.contains('active')) {
+                // Close menu with animation
+                navLinks.style.opacity = '0';
+                navLinks.style.transform = 'translateY(-10px)';
+                
+                setTimeout(() => {
+                    navLinks.classList.remove('active');
+                    navLinks.style.opacity = '';
+                    navLinks.style.transform = '';
+                    mobileMenuBtn.classList.remove('active');
+                    
+                    // Update ARIA attributes for accessibility
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    
+                    // Reset header shadow
+                    setTimeout(() => {
+                        header.style.boxShadow = '';
+                    }, 300);
+                    
+                    // Animate icon change
+                    const menuIcon = mobileMenuBtn.querySelector('i');
+                    if (menuIcon) {
+                        menuIcon.style.transform = 'scale(0)';
+                        setTimeout(() => {
+                            menuIcon.classList.remove('fa-times');
+                            menuIcon.classList.add('fa-bars');
+                            menuIcon.style.transform = 'scale(1)';
+                        }, 150);
+                    }
+                }, 200);
+            }
+        });
+        
+        // Add click event to nav links to close menu when a link is clicked
+        const navLinkItems = navLinks.querySelectorAll('a');
+        navLinkItems.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    // Close menu with animation
+                    navLinks.style.opacity = '0';
+                    navLinks.style.transform = 'translateY(-10px)';
+                    
+                    setTimeout(() => {
+                        navLinks.classList.remove('active');
+                        navLinks.style.opacity = '';
+                        navLinks.style.transform = '';
+                        mobileMenuBtn.classList.remove('active');
+                        
+                        // Update ARIA attributes for accessibility
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        
+                        // Animate icon change
+                        const menuIcon = mobileMenuBtn.querySelector('i');
+                        if (menuIcon) {
+                            menuIcon.style.transform = 'scale(0)';
+                            setTimeout(() => {
+                                menuIcon.classList.remove('fa-times');
+                                menuIcon.classList.add('fa-bars');
+                                menuIcon.style.transform = 'scale(1)';
+                            }, 150);
+                        }
+                    }, 200);
+                }
+            });
+        });
+    }
+    
+    // Search functionality
+    const searchForm = document.getElementById('search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', handleSearch);
     }
     
     // Highlight active page
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinksList = document.querySelectorAll('.nav-link');
     
-    navLinks.forEach(link => {
+    navLinksList.forEach(link => {
         const href = link.getAttribute('href').split('/').pop();
         if (href === currentPage) {
             link.classList.add('active');
         }
     });
+    
+    
+}
+
+
+/**
+ * Handle search form submission without page reload
+ * @param {Event} e - The form submit event
+ */
+function handleSearch(e) {
+    e.preventDefault();
+    
+    const searchInput = document.getElementById('search-input');
+    const searchTerm = searchInput.value.trim();
+    
+    if (!searchTerm) return;
+    
+    // If we're already on the inventory page, perform search without navigation
+    if (window.location.pathname.includes('inventory.html')) {
+        if (typeof window.performSearch === 'function') {
+            window.performSearch(searchTerm);
+        } else {
+            console.warn('Search function not available on this page');
+        }
+    } else {
+        // If on other pages, navigate to inventory with search parameter
+        window.location.href = `inventory.html?search=${encodeURIComponent(searchTerm)}`;
+    }
 }
 
 // Initialize everything when DOM is loaded
@@ -161,5 +255,12 @@ document.addEventListener('DOMContentLoaded', () => {
     loadFromLocalStorage();
     
     // Initialize other components as needed
-    init(); // If this function exists in your code
+    // Check if the initInventory function exists (for inventory page)
+    if (typeof window.initInventory === 'function') {
+        window.initInventory();
+    }
+    // Check if there might be an init function in the current page context
+    else if (typeof init === 'function') {
+        init();
+    }
 });
