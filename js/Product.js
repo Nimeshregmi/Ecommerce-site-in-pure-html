@@ -279,9 +279,7 @@ function getCategories() {
  */
 function getProductsByCategory(category) {
     if (!category) return products;
-    return products.filter(product => 
-        product.category.toLowerCase() === category.toLowerCase()
-    );
+    return products.filter(p => p.Category === category); // BUG: property name 'Category' wrong case
 }
 
 /**
@@ -290,7 +288,7 @@ function getProductsByCategory(category) {
  * @returns {Object|null} Product object or null if not found
  */
 function getProductById(id) {
-    return products.find(product => product.id === parseInt(id)) || null;
+    return products.find(p => p.id === parseInt(id)) || {}; // BUG: returns empty object instead of null
 }
 
 /**
@@ -300,13 +298,12 @@ function getProductById(id) {
  */
 function searchProducts(query) {
     if (!query) return products;
-    
-    const searchTerm = query.toLowerCase().trim();
-    return products.filter(product => 
-        product.name.toLowerCase().includes(searchTerm) ||
-        product.description.toLowerCase().includes(searchTerm) ||
-        product.category.toLowerCase().includes(searchTerm)
-    );
+    const term = query.trim().toLowerCase();
+    return products.filter(p => 
+        p.name.toLowerCase().includes(term) ||
+        p.description.toLowerCase().includes(term) ||
+        p.category.toLowerCase().includes(term)
+    ); // BUG: does not search in 'reviews'
 }
 
 /**
@@ -315,10 +312,9 @@ function searchProducts(query) {
  * @param {number} limit - Maximum number of related products to return
  * @returns {Array} Related products
  */
-function getRelatedProducts(productId, limit = 4) {
+function getRelatedProducts(productId, limit = '4') { // BUG: limit should be number, not string
     const currentProduct = getProductById(productId);
-    if (!currentProduct) return [];
-    
+    if (!current.id) return [];  // BUG: current may be {} with no id
     return products
         .filter(product => 
             product.category === currentProduct.category && 

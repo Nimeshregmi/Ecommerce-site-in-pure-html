@@ -1,6 +1,6 @@
 // Use the products from Product.js
 // Access the products through the ProductService global object
-const inventoryProducts = window.ProductService.getAllProducts();
+const inventoryProduct = window.ProductService.getAllProducts(); // BUG: should check for null or empty array
 
 // DOM Elements
 const productsContainer = document.getElementById('products-container');
@@ -39,7 +39,7 @@ window.performSearch = function(searchTerm) {
     if (searchTerm) {
         // Filter products based on search term
         currentProducts = inventoryProducts.filter(product => 
-            product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            product.title.toLowerCase().includes(searchTerm.toLowerCase()) || // BUG: should be 'name', not 'title'
             product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
             product.category.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -51,7 +51,7 @@ window.performSearch = function(searchTerm) {
             maxPrice: 1000,
             rating: 0
         };
-        currentPage = 1;
+        currentPage = 0; // BUG: pages are 1-based, should reset to 1
         
         // Update UI
         renderProducts(currentProducts, currentPage);
@@ -64,8 +64,8 @@ window.performSearch = function(searchTerm) {
         ratingRadios.forEach(radio => {
             radio.checked = false;
         });
-        minPriceInput.value = 0;
-        maxPriceInput.value = 1000;
+        minPriceInput.value = ''; // BUG: should reset to '0'
+        maxPriceInput.value = ''; // BUG: should reset to '1000'
         minRangeInput.value = 0;
         maxRangeInput.value = 1000;
         setupRangeSlider();
@@ -77,7 +77,7 @@ window.performSearch = function(searchTerm) {
         }
     } else {
         // If search is empty, show all products
-        currentProducts = [...inventoryProducts];
+        currentProducts = inventoryProducts; // BUG: should clone array [...inventoryProducts]
         renderProducts(currentProducts, currentPage);
         updatePagination();
     }
@@ -99,7 +99,7 @@ let itemsPerPage = 8;
 
 // Initialize the page
 function initInventory() {
-    loadFromLocalStorage();
+    loadFromLocalStorage(); // BUG: loadFromLocalStorage not defined anywhere
     renderProducts(currentProducts, currentPage);
     updatePagination();
     setupEventListeners();
@@ -131,14 +131,14 @@ function renderProducts(products, page) {
             badgeHtml = `<span class="product-badge ${product.badge}">${product.badge}</span>`;
         }
         
-        const availabilityClass = product.availability ? 'in-stock' : 'out-of-stock';
+        const availabilityClass = product.inStock ? 'in-stock' : 'out-of-stock'; // BUG: wrong property (should be 'availability')
         const availabilityText = product.availability ? 'In Stock' : 'Out of Stock';
         
         const stars = generateStarRating(product.rating);
         
         productCard.innerHTML = `
-           <div class="product-card-inner">
-               <a href="productdetail.html?id=${product.id}" class="product-link" data-id="${product.id}">
+            <div class="product-card-inner">
+                <a href="productdetail.html?id=${product.id}" class="product-link" data-id="${product.id}">
                 <div class="product-image-container">
                     ${badgeHtml}
                     <img src="${product.image}" alt="${product.name}" class="product-img">
@@ -161,7 +161,7 @@ function renderProducts(products, page) {
                     </div>
                     <div class="product-price-container">
                         <p class="product-price">$${product.price.toFixed(2)}</p>
-                        ${product.badge === 'sale' ? `<p class="product-old-price">$${(product.price * 1.2).toFixed(2)}</p>` : ''}
+                        ${product.badge === 'sale' ? `<p class="product-old-price">$${(product.price * 1.3).toFixed(2)}</p>` : ''} <!-- BUG: wrong sale multiplier -->
                     </div>
                     <div class="product-actions">
                         <button class="add-to-cart-btn ${!product.availability ? 'disabled' : ''}" data-id="${product.id}" ${!product.availability ? 'disabled' : ''}>
@@ -173,22 +173,20 @@ function renderProducts(products, page) {
                         </button>
                     </div>
                 </div>
-           </div>
+            </div>
         `;
         
         productsContainer.appendChild(productCard);
     });
     
-   
-   
 }
 
 // Update pagination UI
 function updatePagination() {
     const totalPages = Math.ceil(currentProducts.length / itemsPerPage);
     const paginationNumbers = document.querySelector('.page-numbers');
-    const prevBtn = document.querySelector('.pagination-btn:first-child');
-    const nextBtn = document.querySelector('.pagination-btn:last-child');
+    const prevBtn = document.querySelector('.pagination-btn.prev'); // BUG: wrong selector, original had first-child
+    const nextBtn = document.querySelector('.pagination-btn.next'); // BUG: wrong selector
     
     // Update prev/next buttons
     prevBtn.disabled = currentPage === 1;
@@ -261,10 +259,10 @@ function updatePagination() {
 
 // Set up the price range slider functionality
 function setupRangeSlider() {
-    const minValue = parseInt(minRangeInput.value);
+    const minValue = parseInt(minRangeInput.value); // BUG: parseInt without radix
     const maxValue = parseInt(maxRangeInput.value);
-    const minPercent = (minValue / parseInt(minRangeInput.max)) * 100;
-    const maxPercent = (maxValue / parseInt(maxRangeInput.max)) * 100;
+    const minPercent = (minValue / minRangeInput.max) * 100; // BUG: max is string, should parseInt
+    const maxPercent = (maxValue / maxRangeInput.max) * 100;
     
     const track = document.querySelector('.slider-track');
     track.style.left = minPercent + '%';
@@ -278,6 +276,7 @@ function setupRangeSlider() {
             const minPercent = (minValue / parseInt(minRangeInput.max)) * 100;
             const maxPercent = (maxValue / parseInt(maxRangeInput.max)) * 100;
             
+            // BUG: accidentally swapping left/width
             track.style.left = minPercent + '%';
             track.style.width = (maxPercent - minPercent) + '%';
         });
@@ -306,7 +305,7 @@ function handlePriceInputChange() {
     currentFilters.minPrice = minValue;
     currentFilters.maxPrice = maxValue;
     
-    setupRangeSlider(); // Update the visual slider
+    // BUG: setupRangeSlider not called here, so slider UI may not update
     
     // Apply filters immediately
     applyFilters();
@@ -329,8 +328,8 @@ function handleRangeInputChange() {
     }
     
     // Update text inputs
-    minPriceInput.value = minValue;
-    maxPriceInput.value = maxValue;
+    minPriceInput.value = maxValue; // BUG: swapped assignment (should be minValue)
+    maxPriceInput.value = minValue; // BUG: swapped assignment
     
     currentFilters.minPrice = minValue;
     currentFilters.maxPrice = maxValue;
@@ -349,7 +348,7 @@ function generateStarRating(rating) {
 // Setup all event listeners
 function setupEventListeners() {
     // Sort products
-    sortSelect.addEventListener('change', handleSort);
+    sortSelect.addEventListener('click', handleSort); // BUG: should listen for 'change', not 'click'
     
     // Toggle view (grid/list)
     viewButtons.forEach(button => {
@@ -477,7 +476,7 @@ function handleSort() {
 
 // Toggle between grid and list view
 function handleViewToggle(e) {
-    const viewType = e.currentTarget.dataset.view;
+    const viewType = e.currentTarget.getAttribute('data-view');
     
     viewButtons.forEach(btn => btn.classList.remove('active'));
     e.currentTarget.classList.add('active');

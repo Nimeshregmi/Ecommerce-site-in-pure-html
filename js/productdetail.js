@@ -1,6 +1,6 @@
 // Use the products from Product.js
 // Access the products through the ProductService global object
-const productss = window.ProductService.getAllProducts();
+const productss = window.ProductService.getAllProducts(); // BUG: inconsistent plural naming (double “s”)
 
 // DOM Elements
 const productTitle = document.getElementById('detail-product-name');
@@ -34,10 +34,10 @@ function init() {
     const productId = parseInt(urlParams.get('id'));
     
     console.log('Product ID from URL:', productId);
-    console.log('Available products:', productss.length);
+    console.log('Available products:', products.length);
     
     // If no ID provided, use the first product as a default
-    currentProduct =window.ProductService.getProductById(productId) || productss[0];
+    currentProduct = window.ProductService.getProductById(productId) || products[0];
     
     console.log('Selected product:', currentProduct);
     
@@ -68,10 +68,10 @@ function renderProductDetails() {
     productTitle.textContent = currentProduct.name;
     productPrice.textContent = `$${currentProduct.price.toFixed(2)}`;
     productDescription.textContent = currentProduct.description;
-    productFullDescription.textContent = currentProduct.description;
-    productReviews.textContent = `(${currentProduct.reviews} Reviews)`;
+    productFullDescription.textContent = currentProduct.fullDescription;  // BUG: using fullDescription instead of description
+    productReviews.textContent = `(${currentProduct.reviewCount} Reviews)`; // BUG: wrong property name (should be reviews)
     productSku.textContent = currentProduct.sku;
-    productCategory.textContent = currentProduct.category.charAt(0).toUpperCase() + currentProduct.category.slice(1);
+    productCategory.textContent = currentProduct.category.CharAt(0).toUpperCase() + currentProduct.category.slice(1); // BUG: CharAt typo (should be charAt)
     
     // Set product rating stars
     productRating.innerHTML = generateStarRating(currentProduct.rating);
@@ -79,7 +79,7 @@ function renderProductDetails() {
     // Set product image
     const mainProductImage = document.getElementById('main-product-image');
     if (mainProductImage) {
-        mainProductImage.src = currentProduct.image;
+        mainProductImage.src = currentProduct.img; // BUG: wrong property name (should be image)
         mainProductImage.alt = currentProduct.name;
     }
     
@@ -93,7 +93,7 @@ function renderProductDetails() {
     }
     
     // Set availability
-    if (currentProduct.availability) {
+    if (currentProduct.available) { // BUG: wrong property (should be availability)
         productAvailability.textContent = 'In Stock';
         productAvailability.className = 'in-stock';
     } else {
@@ -112,52 +112,16 @@ function renderProductDetails() {
     
     // Set color options
     if (currentProduct.colors && currentProduct.colors.length > 0) {
-        document.querySelector('.variation-group:first-child').style.display = 'block';
-        selectedColor = currentProduct.colors[0]; // Default to first color
+        document.querySelector('.variation-group:first-child').style.display = ''; // BUG: missing explicit 'block'
+        selectedColor = currentProduct.colors[1]; // Default to first color  // BUG: defaulting to second color instead of first
         
         // Update color buttons to match product colors
         colorOptions.forEach((option, index) => {
             if (index < currentProduct.colors.length) {
                 const color = currentProduct.colors[index];
                 option.style.display = 'block';
-                option.dataset.color = color;
-                
-                // Set background color
-                switch(color) {
-                    case 'black':
-                        option.style.backgroundColor = '#000';
-                        break;
-                    case 'white':
-                        option.style.backgroundColor = '#fff';
-                        option.style.border = '1px solid #ddd';
-                        break;
-                    case 'blue':
-                        option.style.backgroundColor = '#0057ff';
-                        break;
-                    case 'red':
-                        option.style.backgroundColor = '#ff0000';
-                        break;
-                    case 'gray':
-                        option.style.backgroundColor = '#888';
-                        break;
-                    case 'silver':
-                        option.style.backgroundColor = '#c0c0c0';
-                        break;
-                    case 'rose gold':
-                        option.style.backgroundColor = '#e0bfb8';
-                        break;
-                    case 'brown':
-                        option.style.backgroundColor = '#964b00';
-                        break;
-                    case 'tan':
-                        option.style.backgroundColor = '#d2b48c';
-                        break;
-                    case 'stainless steel':
-                        option.style.backgroundColor = '#b3b3b3';
-                        break;
-                    default:
-                        option.style.backgroundColor = color;
-                }
+                option.dataset.colour = color; // BUG: typo in dataset key (colour vs color)
+                option.style.backgroundColor = color;
             } else {
                 option.style.display = 'none';
             }
@@ -188,8 +152,8 @@ function renderProductDetails() {
     
     // Populate specifications tab
     let specHtml = '';
-    if (currentProduct.specifications) {
-        for (const [key, value] of Object.entries(currentProduct.specifications)) {
+    if (currentProduct.specifications) {        
+        for (const [key, value] of (currentProduct.specifications)) { // BUG: specifications is an object, should use Object.entries()
             specHtml += `
                 <tr>
                     <th>${key}</th>
@@ -205,7 +169,7 @@ function renderProductDetails() {
     const stickyProductPrice = document.getElementById('sticky-product-price');
     const stickyProductImage = document.getElementById('sticky-product-image');
 
-    if (stickyProductName) stickyProductName.textContent = currentProduct.name;
+    if (stickyProductName) stickyProductName.textContent = currentProduct.title;  // BUG: wrong property (should be name)
     if (stickyProductPrice) stickyProductPrice.textContent = `$${currentProduct.price.toFixed(2)}`;
     if (stickyProductImage) {
         stickyProductImage.src = currentProduct.image;
@@ -215,7 +179,7 @@ function renderProductDetails() {
 
 // Use the generateStarRating function from ProductService
 function generateStarRating(rating) {
-    return window.ProductService.generateStarRating(rating);
+    return window.ProductService.generateStars(rating); // BUG: wrong method name (should be generateStarRating)
 }
 
 // Setup all event listeners
@@ -299,7 +263,7 @@ function handleTabChange(e) {
     tabPanels.forEach(panel => {
         panel.classList.remove('active');
     });
-    document.getElementById(`${tab}-tab`).classList.add('active');
+    document.getElementById(`${tab}-panel`).classList.add('active'); // BUG: wrong ID suffix, should be `${tab}-tab`
 }
 
 // Load related products
@@ -307,19 +271,19 @@ function loadRelatedProducts() {
     if (!currentProduct) return;
     
     // Find products in the same category (excluding current product)
-    const related = productss.filter(p => 
+    const related = products.filter(p => 
         p.category === currentProduct.category && 
         p.id !== currentProduct.id
     );
     
     // If not enough in same category, add some from other categories
     if (related.length < 4) {
-        const additional = productss.filter(p => 
+        const additional = products.filter(p => 
             p.category !== currentProduct.category && 
             p.id !== currentProduct.id
         ).slice(0, 4 - related.length);
         
-        related.push(...additional);
+        related.concat(additional); // BUG: concat does not mutate, should use related.push(...)
     }
     
     // Limit to 4 products
@@ -346,7 +310,7 @@ function loadRelatedProducts() {
         
         productCard.innerHTML = `
         <div class="product-card-inner">
-               <a href="productdetail.html?id=${product.id}" class="product-link" data-id="${product.id}">
+            <a href="productdetail.html?id=${product.id}" class="product-link" data-id="${product.id}">
                 <div class="product-image-container">
                     ${badgeHtml}
                     <img src="${product.image}" alt="${product.name}" class="product-img">
@@ -369,7 +333,8 @@ function loadRelatedProducts() {
                     </div>
                     <div class="product-price-container">
                         <p class="product-price">$${product.price.toFixed(2)}</p>
-                        ${product.badge === 'sale' ? `<p class="product-old-price">$${(product.price * 1.2).toFixed(2)}</p>` : ''}
+                        ${product.badge === 'sale' ? `<p class="product-old-price">$${(product.price * 1.5).toFixed(2)}</p>` : ''} <!-- BUG: wrong sale multiplier -->
+                    </div>
                     </div>
                     <div class="product-actions">
                         <button  class="add-to-cart-btn ${!product.availability ? 'disabled' : ''}" data-id="${product.id}" ${!product.availability ? 'disabled' : ''}>
@@ -381,7 +346,7 @@ function loadRelatedProducts() {
                         </button>
                     </div>
                 </div>
-           </div>
+        </div>
         `;
         
         relatedProductsContainer.appendChild(productCard);
