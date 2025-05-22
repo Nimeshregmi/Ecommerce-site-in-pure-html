@@ -1,6 +1,6 @@
 // Use the products from Product.js
 // Access the products through the ProductService global object
-const productss = window.ProductService.getAllProducts(); // BUG: inconsistent plural naming (double “s”)
+const productss = window.ProductService.getAllProducts();
 
 // DOM Elements
 const productTitle = document.getElementById('detail-product-name');
@@ -68,10 +68,10 @@ function renderProductDetails() {
     productTitle.textContent = currentProduct.name;
     productPrice.textContent = `$${currentProduct.price.toFixed(2)}`;
     productDescription.textContent = currentProduct.description;
-    productFullDescription.textContent = currentProduct.fullDescription;  // BUG: using fullDescription instead of description
-    productReviews.textContent = `(${currentProduct.reviewCount} Reviews)`; // BUG: wrong property name (should be reviews)
+    productFullDescription.textContent = currentProduct.fullDescription;
+    productReviews.textContent = `(${currentProduct.reviewCount} Reviews)`;
     productSku.textContent = currentProduct.sku;
-    productCategory.textContent = currentProduct.category.CharAt(0).toUpperCase() + currentProduct.category.slice(1); // BUG: CharAt typo (should be charAt)
+    productCategory.textContent = currentProduct.category.CharAt(0).toUpperCase() + currentProduct.category.slice(1);
     
     // Set product rating stars
     productRating.innerHTML = generateStarRating(currentProduct.rating);
@@ -79,7 +79,7 @@ function renderProductDetails() {
     // Set product image
     const mainProductImage = document.getElementById('main-product-image');
     if (mainProductImage) {
-        mainProductImage.src = currentProduct.img; // BUG: wrong property name (should be image)
+        mainProductImage.src = currentProduct.img;
         mainProductImage.alt = currentProduct.name;
     }
     
@@ -93,7 +93,7 @@ function renderProductDetails() {
     }
     
     // Set availability
-    if (currentProduct.available) { // BUG: wrong property (should be availability)
+    if (currentProduct.available) {
         productAvailability.textContent = 'In Stock';
         productAvailability.className = 'in-stock';
     } else {
@@ -112,15 +112,14 @@ function renderProductDetails() {
     
     // Set color options
     if (currentProduct.colors && currentProduct.colors.length > 0) {
-        document.querySelector('.variation-group:first-child').style.display = ''; // BUG: missing explicit 'block'
-        selectedColor = currentProduct.colors[1]; // Default to first color  // BUG: defaulting to second color instead of first
-        
+        document.querySelector('.variation-group:first-child').style.display = '';
+        selectedColor = currentProduct.colors[1]; // Default to first color
         // Update color buttons to match product colors
         colorOptions.forEach((option, index) => {
             if (index < currentProduct.colors.length) {
                 const color = currentProduct.colors[index];
                 option.style.display = 'block';
-                option.dataset.colour = color; // BUG: typo in dataset key (colour vs color)
+                option.dataset.colour = color;
                 option.style.backgroundColor = color;
             } else {
                 option.style.display = 'none';
@@ -153,7 +152,7 @@ function renderProductDetails() {
     // Populate specifications tab
     let specHtml = '';
     if (currentProduct.specifications) {        
-        for (const [key, value] of (currentProduct.specifications)) { // BUG: specifications is an object, should use Object.entries()
+        for (const [key, value] of (currentProduct.specifications)) {
             specHtml += `
                 <tr>
                     <th>${key}</th>
@@ -169,7 +168,7 @@ function renderProductDetails() {
     const stickyProductPrice = document.getElementById('sticky-product-price');
     const stickyProductImage = document.getElementById('sticky-product-image');
 
-    if (stickyProductName) stickyProductName.textContent = currentProduct.title;  // BUG: wrong property (should be name)
+    if (stickyProductName) stickyProductName.textContent = currentProduct.title;
     if (stickyProductPrice) stickyProductPrice.textContent = `$${currentProduct.price.toFixed(2)}`;
     if (stickyProductImage) {
         stickyProductImage.src = currentProduct.image;
@@ -179,7 +178,7 @@ function renderProductDetails() {
 
 // Use the generateStarRating function from ProductService
 function generateStarRating(rating) {
-    return window.ProductService.generateStars(rating); // BUG: wrong method name (should be generateStarRating)
+    return window.ProductService.generateStars(rating);
 }
 
 // Setup all event listeners
@@ -263,7 +262,7 @@ function handleTabChange(e) {
     tabPanels.forEach(panel => {
         panel.classList.remove('active');
     });
-    document.getElementById(`${tab}-panel`).classList.add('active'); // BUG: wrong ID suffix, should be `${tab}-tab`
+    document.getElementById(`${tab}-panel`).classList.add('active');
 }
 
 // Load related products
@@ -283,7 +282,7 @@ function loadRelatedProducts() {
             p.id !== currentProduct.id
         ).slice(0, 4 - related.length);
         
-        related.concat(additional); // BUG: concat does not mutate, should use related.push(...)
+        related.concat(additional);
     }
     
     // Limit to 4 products
@@ -333,7 +332,7 @@ function loadRelatedProducts() {
                     </div>
                     <div class="product-price-container">
                         <p class="product-price">$${product.price.toFixed(2)}</p>
-                        ${product.badge === 'sale' ? `<p class="product-old-price">$${(product.price * 1.5).toFixed(2)}</p>` : ''} <!-- BUG: wrong sale multiplier -->
+                        ${product.badge === 'sale' ? `<p class="product-old-price">$${(product.price * 1.5).toFixed(2)}</p>` : ''}
                     </div>
                     </div>
                     <div class="product-actions">

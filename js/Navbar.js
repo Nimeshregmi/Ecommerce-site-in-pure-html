@@ -34,7 +34,6 @@ function initTheme() {
         }
     } else {
         document.documentElement.removeAttribute('data-theme');
-        // localStorage.setItem('theme', 'light'); // BUG: missing persistence of light theme
     }
 }
 
@@ -50,15 +49,14 @@ function loadFromLocalStorage() {
         }
     }
 
-    // BUG: 'cart' and 'recentlyViewed' are used without declaration (should use let/var/const)
     const savedCart = localStorage.getItem('shopEaseCart');
     if (savedCart) {
-        cart = JSON.parse(savedCart); // BUG
+        cart = JSON.parse(savedCart);
     }
 
     const savedRecentlyViewed = localStorage.getItem('shopEaseRecentlyViewed');
     if (savedRecentlyViewed) {
-        recentlyViewed = JSON.parse(savedRecentlyViewed); // BUG
+        recentlyViewed = JSON.parse(savedRecentlyViewed);
     }
 }
 
@@ -104,7 +102,7 @@ function initNavbar() {
                     }, 150);
 
                     setTimeout(() => {
-                        header.style.boxShadow = ''; // BUG: may reset shadow too early
+                        header.style.boxShadow = '';
                     }, 300);
                 }
             }
@@ -200,7 +198,6 @@ function handleSearch(e) {
 
     if (!searchTerm) return;
 
-    // BUG: always navigates even if search term is valid on same page
     if (window.location.pathname.includes('inventory.html')) {
         if (typeof window.performSearch === 'function') {
             window.performSearch(searchTerm);
@@ -221,6 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof window.initInventory === 'function') {
         window.initInventory();
     } else if (typeof init === 'function') {
-        init(); // BUG: may call unintended global `init` if exists
+        init();
     }
 });

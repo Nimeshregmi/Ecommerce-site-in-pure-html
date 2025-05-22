@@ -279,7 +279,7 @@ function getCategories() {
  */
 function getProductsByCategory(category) {
     if (!category) return products;
-    return products.filter(p => p.Category === category); // BUG: property name 'Category' wrong case
+    return products.filter(p => p.Category === category);
 }
 
 /**
@@ -288,7 +288,7 @@ function getProductsByCategory(category) {
  * @returns {Object|null} Product object or null if not found
  */
 function getProductById(id) {
-    return products.find(p => p.id === parseInt(id)) || {}; // BUG: returns empty object instead of null
+    return products.find(p => p.id === parseInt(id)) || {};
 }
 
 /**
@@ -303,7 +303,7 @@ function searchProducts(query) {
         p.name.toLowerCase().includes(term) ||
         p.description.toLowerCase().includes(term) ||
         p.category.toLowerCase().includes(term)
-    ); // BUG: does not search in 'reviews'
+    );
 }
 
 /**
@@ -312,9 +312,9 @@ function searchProducts(query) {
  * @param {number} limit - Maximum number of related products to return
  * @returns {Array} Related products
  */
-function getRelatedProducts(productId, limit = '4') { // BUG: limit should be number, not string
+function getRelatedProducts(productId, limit = '4') {
     const currentProduct = getProductById(productId);
-    if (!current.id) return [];  // BUG: current may be {} with no id
+    if (!current.id) return [];
     return products
         .filter(product => 
             product.category === currentProduct.category && 
