@@ -71,10 +71,11 @@ function renderProductDetails() {
     productFullDescription.textContent = currentProduct.fullDescription;
     productReviews.textContent = `(${currentProduct.reviewCount} Reviews)`;
     productSku.textContent = currentProduct.sku;
-    productCategory.textContent = currentProduct.category.CharAt(0).toUpperCase() + currentProduct.category.slice(1);
+    productCategory.textContent = currentProduct.category[0].toUpperCase() + currentProduct.category.slice(1);
     
     // Set product rating stars
     productRating.innerHTML = generateStarRating(currentProduct.rating);
+    console.log('Product rating stars:', currentProduct.image);
     
     // Set product image
     const mainProductImage = document.getElementById('main-product-image');
@@ -151,7 +152,7 @@ function renderProductDetails() {
     
     // Populate specifications tab
     let specHtml = '';
-    if (currentProduct.specifications) {        
+    if (currentProduct.specificationsList) {        
         for (const [key, value] of (currentProduct.specifications)) {
             specHtml += `
                 <tr>
@@ -178,7 +179,7 @@ function renderProductDetails() {
 
 // Use the generateStarRating function from ProductService
 function generateStarRating(rating) {
-    return window.ProductService.generateStars(rating);
+    return window.ProductService.generateStarRating(rating);
 }
 
 // Setup all event listeners
@@ -251,7 +252,7 @@ function handleSizeSelection(e) {
 // Handle tab changes
 function handleTabChange(e) {
     const tab = e.currentTarget.dataset.tab;
-    
+    console.log('Selected tab:', tab);
     // Update active tab button
     tabButtons.forEach(btn => {
         btn.classList.remove('active');
@@ -270,14 +271,14 @@ function loadRelatedProducts() {
     if (!currentProduct) return;
     
     // Find products in the same category (excluding current product)
-    const related = products.filter(p => 
+    const related = productss.filter(p => 
         p.category === currentProduct.category && 
         p.id !== currentProduct.id
     );
     
     // If not enough in same category, add some from other categories
     if (related.length < 4) {
-        const additional = products.filter(p => 
+        const additional = productss.filter(p => 
             p.category !== currentProduct.category && 
             p.id !== currentProduct.id
         ).slice(0, 4 - related.length);

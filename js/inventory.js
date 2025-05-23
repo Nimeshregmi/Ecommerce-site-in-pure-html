@@ -1,6 +1,6 @@
 // Use the products from Product.js
 // Access the products through the ProductService global object
-const inventoryProduct = window.ProductService.getAllProducts();
+const inventoryProducts = window.ProductService.getAllProducts();
 
 // DOM Elements
 const productsContainer = document.getElementById('products-container');
@@ -116,7 +116,7 @@ function renderProducts(products, page) {
     // Apply pagination
     const startIndex = (page - 1) * itemsPerPage;
     const paginatedProducts = products.slice(startIndex, startIndex + itemsPerPage);
-    
+    console.log(paginatedProducts);
     if (paginatedProducts.length === 0) {
         productsContainer.innerHTML = '<div class="no-products">No products found matching your filters.</div>';
         return;

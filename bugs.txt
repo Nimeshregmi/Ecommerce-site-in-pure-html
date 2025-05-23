@@ -1,3 +1,25 @@
 Bug Count: 35
 
 Bug Description:
+ During my review and testing of the web application, I identified and resolved several issues affecting the product display and UI functionality:
+
+1)Product Not Loading
+
+-Issue: Products were not loading on the webpage, particularly in the Shop section and related product pages.
+-Fix: I identified and corrected the bug, and the products now load and display correctly across all relevant sections.
+
+2)Product Ratings Not Displaying
+
+-Issue: Ratings were missing from the product description section.
+-Fix: This issue has been resolved and the ratings now display properly on the product detail pages.
+
+3)Bottom Tabs Not Functioning
+
+-Issue: The tabs located at the bottom of the product detail page were non-functional.
+-Fix: I updated the code and ensured they now switch content as expected.
+
+4)Console Errors (2–3 Issues)
+
+-Issue: Multiple errors were showing in the browser console, which could lead to performance issues or UI bugs.
+
+-Fix: I reviewed and fixed all visible console errors.
